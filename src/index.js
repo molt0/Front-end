@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Main from './pages/Main';
+import Login from './pages/Login';
+import SearchList from './pages/SearchList';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Main /> */}
+    {/* <SearcgList /> */}
+    {/* <SearchList /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
