@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-image: url("../img/login_bg.png");
+}
+header {
+    height: 75px;
+    /* background-color: rgb(129, 129, 129); */
+    display: flex;
+}
+.logo {
+    width: 200px;
+    height: 75px;
+}
+.logo > a > img {
+    margin-top: 14.5px;
+    margin-left: 100px;
+}
+.serch {
+    background: none;
+    width: 500px;
+    height: 30px;
+    margin-top: 25px;
+    margin-left: 1000px;
+    border: none;
+    border-bottom: 1px solid #fff;
+}
