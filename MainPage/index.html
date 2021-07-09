@@ -5,26 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인 페이지</title>
-    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../global/css/header.css">
+    <link rel="stylesheet" href="./css/recent_list.css">
+    <link rel="stylesheet" href="./css/main_under.css">
+    <script src="./script/script.js"></script>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="#"><img src="./img/logo.png" alt=""></a>
+            <a href="../MainPage/index.html"><img src="../global/images/logo.png" alt=""></a>
         </div>
-        <input type="text" class="serch" placeholder="제목을 입력해주세요">
+        <form class="search" action='../SearchPage/index.html'>
+            <input type="text" class="serch" placeholder="제목을 입력해주세요" maxlength='20' onkeypress="if( event.keyCode == 13 ){enterkey();}">
+            <input  TYPE="IMAGE" class="serch_btn" src="../global/images/search_icon.png" name="Submit" value="Submit"  align="absmiddle">
+        </form>
         <div class="hamburger">
             <div class="hamburgerline"></div>
             <div class="hamburgerline"></div>
             <div class="hamburgerline"></div>
         </div>
     </header>
-    <div class="recent_list"></div>
-    <div class="underlist">
-        <div class="popularity_list"></div>
-        <div class="popularity2_list"></div>
+    <div class="main_contents">
+        <div class="PlayList">
+            <p>로그인하여 최근목록을 확인하세요.</p>
+            <a href="../Login/index.html"><input type="button" class="login_btn" value="로그인"></a>
+        </div>
+        <div class="underlist">
+            <div class="recent_list"></div>
+            <div class="popularity_list"></div>
+            <div class="main_other_contents">
+                <div class="today_song"></div>
+                <a href="https://www.youtube.com/music">
+                    <div class="music_video" onclick="">
+                        <div>
+                            <img src="../global/images/youtube_icon.png" alt="">
+                            <p>음악 듣기 / 뮤직 비디오 보러가기</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+        </div>     
     </div>
-    </div>   
 
 </body>
 </html>

@@ -1,0 +1,56 @@
+/* 최근목록 */
+.main_contents {
+    position: relative;
+    width: 1700px;
+    margin: 0 auto;
+}
+.PlayList {
+    width: 100%;
+    height: 150px;
+    border: 2px solid rgba(255, 255, 255, 0.377);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+.login_btn {
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.377);
+    font-weight: bold;
+    color: #fff;
+}
+.underlist {
+    width: 100%;
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+.recent_list, .popularity_list {
+    width: 500px;
+    height: 600px;
+    border: 2px solid rgba(255, 255, 255, 0.377);
+}
+.today_song {
+    display: block;
+    width: 500px;
+    height: 340px;
+    border: 2px solid rgba(255, 255, 255, 0.377);
+}
+.music_video {
+    position: absolute;
+    bottom: 0;
+    width: 500px;
+    height: 200px;
+    border: 2px solid rgba(255, 255, 255, 0.377);
+}
+.music_video > *{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: #fff;
+}
