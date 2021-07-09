@@ -1,0 +1,50 @@
+
+header {
+    height: 100px;
+    /* background-color: rgb(129, 129, 129); */
+    display: flex;
+}
+
+.logo > a > img {
+    width: 130px;
+    margin-top: 14.5px;
+    margin-left: 100px;
+}
+.serch {
+    background: none;
+    width: 500px;
+    height: 30px;
+    margin-top: 25px;
+    margin-left: 1050px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+}
+.serch_btn{
+    background-image: url(../../global/images/search_icon.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    filter: grayscale(1);
+}
+.hamburger {
+    position: absolute;
+    right: 5px;
+    width: 40px;
+    height: 100%;
+    display: block;
+    float: right;
+    cursor: pointer;
+}
+.hamburgerline{
+    width: 35px;
+    margin-top: 5px;
+    display: block;
+    margin-left: auto;
+    border-top: 4px solid #fff;
+}
+.hamburger > div:first-child {
+    margin-top : 32px;
+}  
+
