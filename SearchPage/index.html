@@ -6,15 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>molto</title>
     <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="../global/css/header.css">
 </head>
 <body>
-    <div class="wrap">
-        <div class="lbody">
-            <div class="threeLines"><a href="#"><img src="./image/threeLines.png" alt="목록"></a></div>
-            <div class="spring"><a href="#"><img src="./image/spring.png" alt="설정"></a></div>
+    <header>
+        <div class="logo">
+            <a href="../MainPage/index.html"><img src="../global/images/logo.png" alt=""></a>
         </div>
+        <form class="search" action='../SearchPage/index.html'>
+            <input type="text" class="serch" placeholder="제목을 입력해주세요" maxlength='5' onkeypress="if( event.keyCode == 13 ){enterkey();}">
+            <input  TYPE="IMAGE" class="serch_btn" src="../global/images/search_icon.png" name="Submit" value="Submit"  align="absmiddle">
+        </form>
+        <div class="hamburger">
+            <div class="hamburgerline"></div>
+            <div class="hamburgerline"></div>
+            <div class="hamburgerline"></div>
+        </div>
+    </header>
+    <div class="wrap">
         <div class="c_body">
-            <header><img src="./image/headerImg.png" alt="header"></header>
             <div class="contants">
                 <div class="contant_menu">
                     <select name="sort1" id="sort1">
@@ -29,7 +39,6 @@
                     </div>
                 </div> <hr>
                 <div class="contant_body">
-                    
                     <div class="album">
                         <div class="album_img"><img src="./image/musicimg1.png" alt="앨범_사진"></div>
                         <div class="album_tit">앨범_이름</div>
@@ -63,10 +72,6 @@
 
                 </div>
             </div>
-        </div>
-        <div class="rbody">
-            <div class="threeLines"><a href="#"><img src="./image/threeLines.png" alt="목록"></a></div>
-            <div class="spring"><a href="#"><img src="./image/spring.png" alt="설정"></a></div>
         </div>
     </div>
     <a href="https://icons8.com/icon/93873/방법을-제공">방법을 제공 icon by Icons8</a>

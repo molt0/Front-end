@@ -12,28 +12,18 @@ a{
     color: inherit; 
     text-decoration: none;
 }
-img{
-    width: 100%; height: 100%;
-}
-
 body{
-    background: url(../image/backgroundImg.png) no-repeat;
+    background: url(../../global/images/login_bg.png) no-repeat;
     background-size: 100% 100%;
     color: #fff;
 }
 
 .wrap{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 5fr 90fr 5fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr; */
     width: 100vw;
-    height: 100vh;
-}
-.lbody, .rbody{
-    background-color: rgb(15, 20, 50);
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    height: 100vh;    
 }
 .threeLines{
     width: 100%;
@@ -41,16 +31,9 @@ body{
 .spring{
     width: 100%;
 }
-
 .cbody{
     background-color: yellow;
-}
-header{
-    width: 100%;
-    height: 100px;
-}
-header img{
-    width: 100%; height: 100%;
+    justify-content: center;
 }
 .contants{
     width: 1300px;
@@ -146,4 +129,7 @@ select::-ms-expand {
     width: 100px; height: 100px;
     text-align: center;
     line-height: 100px;
+}
+.album img{
+    width: 100%; height: 100%;
 }
