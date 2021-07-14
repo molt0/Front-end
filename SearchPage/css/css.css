@@ -85,51 +85,116 @@ select::-ms-expand {
     border-radius: 20px;
 }
 
-.album{
+.sorts{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+}
+
+.more_vert_horiz{
+    width: 50px;  height: 50px;
+}
+.more_vert_horiz> img{
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+.more_vert_horiz> img.more_on:hover{
+    cursor: pointer;
+}
+.more_vert_horiz> img.more_on{
+    display: block;
+}
+
+/* 세로 정렬 스타일*/
+.vertical{
+    display: grid;
+    grid-gap: 5px 0;
+}
+.vertical .album{
     display: grid;
     grid-template-columns: 100px 3fr 1fr 100px ;
     align-items: center;
     width: 100%; height: 100px;
     padding: 0 10%;
-    margin-top: 5px;
     transition-duration: 0.5s;
 }
-.album:hover{
+.vertical .album:hover{
     background: linear-gradient( to right, rgba(0, 0, 0, 0.0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(0, 0, 0, 0.0) 100%);
-    height: 150px;
+    height: 130px;
     font-size: 18px;
     font-weight: bold;
     transition-duration: 0.5s;
 }
-.album:hover .album_img{
+.vertical .album:hover .album_img{
     transform: scale(1.2);
 }
-.album:hover .album_artist{
+.vertical .album:hover .album_artist{
     display: block;
 }
-.album:hover .album_time{
+.vertical .album:hover .album_time{
     display: block;
 }
-.album .album_img{
+.vertical .album .album_img{
     width: 100px; height: 100px;
 }
-.album .album_tit{
+.vertical .album .album_tit{
     width: 150px; height: 100px;
     text-align: center;
     line-height: 100px;
 }
-.album .album_artist{
+.vertical .album .album_artist{
     display: none;
     width: 150px; height: 100px;
     text-align: center;
     line-height: 100px;
 }
-.album .album_time{
+.vertical .album .album_time{
     display: none;
     width: 100px; height: 100px;
     text-align: center;
     line-height: 100px;
 }
-.album img{
+.vertical .album img{
+    width: 100%; height: 100%;
+}
+
+/* 가로 정렬 스타일*/
+.horizontal{
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(auto, 200px);
+    transition-duration: 0.5s;
+}
+.horizontal .album{
+    width: 150px; height: 200px;
+    padding: 10px;
+    border-radius: 20px;
+}
+.horizontal .album:hover{
+    border: 2px solid #797979;
+    background-color: #1b1b1b;
+}
+.horizontal .album .album_img{
+    width: 100px; height: 100px;
+    margin: 0 auto;
+}
+.horizontal .album .album_tit{
+    width: 100%; height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+.horizontal .album .album_artist{
+    width: 100%; height: 50px;
+    text-align: center;
+    line-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.horizontal .album .album_time{
+    display: none;
+}
+.horizontal .album img{
     width: 100%; height: 100%;
 }
