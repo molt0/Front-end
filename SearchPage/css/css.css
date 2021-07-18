@@ -19,6 +19,8 @@ body{
 }
 
 .wrap{
+    position: relative;
+    top: 70px;
     /* display: grid;
     grid-template-columns: 5fr 90fr 5fr;
     grid-template-rows: 1fr; */
