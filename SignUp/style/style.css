@@ -28,8 +28,10 @@ body {
     margin-top: -40px;
 }   
 .menu img {
-    height: 95%;
     overflow: hidden;
+    position: absolute;
+    right: 10px;
+    top: 30px;
 }
 .wrap {
     width: 100vw;
