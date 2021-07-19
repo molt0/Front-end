@@ -7,9 +7,13 @@ header {
     align-items: center;
 
     position: fixed;
-    z-index: 1000;
+    z-index: 5;
 
     padding: 0 40px;
+    border-bottom: 1px solid grey;
+    background-image: url("../images/header_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .logo > a > img {
