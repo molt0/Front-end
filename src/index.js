@@ -9,6 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
+      <Header />
         <Route exact path="/" component={SpecificPage} />
       </BrowserRouter>
     </ChakraProvider>
