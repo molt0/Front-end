@@ -9,9 +9,9 @@ import { Divider } from "@chakra-ui/react"
 const SpecificPage = () => {
   return(
     <div>
-      <Header/>
-      <HeadInfo/>
-      <ButtonMenus/>
+      <Header />
+      <HeadInfo />
+      <ButtonMenus />
       <Divider mt="30px" colorScheme="whiteAlpha"/>
     </div>
   );
