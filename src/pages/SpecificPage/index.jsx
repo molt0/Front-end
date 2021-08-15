@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../../components/SpecificPage/Header"
 import HeadInfo from "../../components/SpecificPage/HeadInfo"
 import ButtonMenus from "../../components/SpecificPage/ButtonMenus"
+import TextEditor from "../../components/SpecificPage/TextEditor"
 
 import { Divider } from "@chakra-ui/react"
 
@@ -13,6 +14,7 @@ const SpecificPage = () => {
       <HeadInfo />
       <ButtonMenus />
       <Divider mt="30px" colorScheme="whiteAlpha"/>
+      <TextEditor />
     </div>
   );
 }
