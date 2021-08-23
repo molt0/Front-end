@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 
-import { Button, Switch, FormControl, FormLabel } from "@chakra-ui/react";
+import EditorJs from "react-editor-js";
+import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
+
+import { Button, Switch, FormLabel } from "@chakra-ui/react";
 
 const Flex = styled.div`
   display: flex;
@@ -19,8 +20,7 @@ const ControlContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  background-color: #ececec;
-
+  background-color: #fbfbfb;
 `;
 
 const EditorContainer = styled.div`
@@ -30,40 +30,50 @@ const EditorContainer = styled.div`
   height: 800px;
 `;
 
+const Footer = styled.div`
+  width: 100%;
+  height: 80px;
+
+  background-color: #ebe8e8;
+`;
+
 const ContentEditor = () => {
   const [content, setContent] = useState("");
+  const instanceRef = useRef(null);
+
+  async function sendData() {
+    const savedContent = await instanceRef.current.save();
+    console.log(savedContent);
+  }
 
   return (
     <>
-    <ControlContainer>
-      <Flex>
-        <Button size="md">❮</Button>
-      </Flex>
+      <ControlContainer>
+        <Flex>
+          <Button size="md">❮</Button>
+        </Flex>
 
+        <Flex>
+          <FormLabel htmlFor="email-alerts" mb="0">
+            미리보기 모드
+          </FormLabel>
+          <Switch size="lg" id="email-alerts" />
+        </Flex>
+      </ControlContainer>
 
-      <Flex>
-        <FormLabel htmlFor="email-alerts" mb="0">
-          미리보기 모드
-        </FormLabel>
-        <Switch size="lg" id="email-alerts" />
-      </Flex>
-    </ControlContainer>
+      <EditorContainer>
+        <EditorJs
+          data={content}
+          onChange={(e) => {
+            setContent(content);
+          }}
+          instanceRef={(instance) => (instanceRef.current = instance)}
+          tools={EDITOR_JS_TOOLS}
+        />
+        ;
+      </EditorContainer>
 
-    <EditorContainer>
-
-      <CKEditor
-        editor={ClassicEditor}
-        data={content}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setContent(data);
-        }}
-        
-      />
-
-    </EditorContainer>
-      {content}
-      
+      <Footer />
     </>
   );
 };
