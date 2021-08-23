@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  Box,
   Stack,
   Heading,
   Flex,
-  Text,
   Button,
   useDisclosure,
   Input,
@@ -16,7 +14,6 @@ import {
   Drawer,
   DrawerBody,
   DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
@@ -35,13 +32,13 @@ const Header = (props) => {
       align="center"
       justify="space-between"
       wrap="wrap"
-      padding={6}
+      padding={5}
       bg="teal.300"
       color="white"
       {...props}
       >
       <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={"tighter"}>
+        <Heading as="h1" size="lg" letterSpacing={"tighter"} ml={10}>
           Molto
         </Heading>
       </Flex>
