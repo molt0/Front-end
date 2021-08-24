@@ -10,7 +10,7 @@ const MainPage = () => {
     <Container maxW="1500px" mx="auto">
       <RecentSearch />
       <Flex mt="100px">
-        <Heading size="lg" color="gray.500">MUSIC LANKING</Heading>
+        <Heading size="lg" color="gray.500">MUSIC RANKING</Heading>
         <Rank_Top100 />
         <Rank_Day />
         <Rank_Week />
