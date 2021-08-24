@@ -1,38 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   Box,
-  Heading, 
-  Button
+  Heading,
+  Flex,
+  SimpleGrid,
+  Image
 } from "@chakra-ui/react";
+import cheerio from 'cheerio';
+import request from 'request';
+
 
 const Rank_Week = () => {
+  
+  const [albumImg, setalbumImg] = useState([]);
+  const [title, settitle] = useState([]);
+  const [artist, setartist] = useState([]);
+  var url = 'https://www.melon.com/chart/week/index.htm';
+
+  var rank = 10;  
+  useEffect(() =>  {
+      request(url, function(error, response, html){
+        if (!error) {
+          var $ = cheerio.load(html);
+          
+          $('.image_typeAll>img').each(function(){
+              setalbumImg((prev) => ([
+                ...prev,
+                $(this).attr("src")
+              ]))
+          })  
+          $('.ellipsis.rank01 > span > a').each(function(){
+            settitle((prev) => ([
+              ...prev,
+              $(this).text()
+            ]))
+            console.log("test");
+          })  
+          $('.ellipsis.rank02 > span').each(function(){
+            setartist((prev) => ([
+              ...prev,
+              $(this).text()
+            ]))
+          })  
+        }
+      });
+    },[])
+  
   return(
     <div>
-        <Box  width="450px" mt="30px">
-            <Heading size="lg" ml="360px" color="gray.500">Week</Heading>
-            <Box width="100%" height="100%" maxW="1500px" mx="auto" mt="10px" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-            <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                1
-              </Box>
-              <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                2
-              </Box>
-              <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                3
-              </Box>
-              <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                4
-              </Box>
-              <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                5
-              </Box>
-              <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                6
-              </Box>
-              <Box width="430px" height="90px" mt="10px" ml="10px" lineHeight="80px" fontSize="60px"pl="200px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
-                7
-              </Box>
+        <Box width="400px" mt="30px" mr="10px">
+            <Heading size="lg" textAlign="right" color="gray.500">WEEK</Heading>
+            <Box width="100%" height="100%" mt="10px" borderRadius="md" boxShadow="lg" bg="#979191;">
+            <SimpleGrid columns={1} spacingX="100px">
+            {
+                title.map((titleName, i) => (
+                  <Box key={i} width="380px" height="80px" mt="10px" ml="10px" lineHeight="80px" fontWeight="extrabold" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
+                    <Flex>
+                      <div className="rank">{i+1}</div>
+                      <Image borderRadius="full" boxSize="50px" src={albumImg[i]} alt="Segun Adebayo" />
+                      <div className="title">{titleName}</div>
+                      <div className="artist">{artist[i]}</div>
+                    </Flex>
+                  </Box>
+                ))
+              }
+            </SimpleGrid>
             </Box>
         </Box>
         
