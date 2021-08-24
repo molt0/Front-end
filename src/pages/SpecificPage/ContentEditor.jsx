@@ -26,8 +26,10 @@ const ControlContainer = styled.div`
 const EditorContainer = styled.div`
   margin: 0 auto;
 
-  width: 95%;
+  width: 1200px;
   height: 800px;
+
+  border: 1px solid #A4E8E0;
 `;
 
 const Footer = styled.div`
