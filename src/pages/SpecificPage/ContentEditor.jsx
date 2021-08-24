@@ -45,7 +45,12 @@ const ContentEditor = () => {
 
   async function sendData() {
     const savedContent = await instanceRef.current.save();
+  
     console.log(savedContent);
+  }
+
+  const setReadOnly = () =>{
+    instanceRef.current.readOnly.toggle();
   }
 
   return (
@@ -72,7 +77,8 @@ const ContentEditor = () => {
           instanceRef={(instance) => (instanceRef.current = instance)}
           tools={EDITOR_JS_TOOLS}
         />
-        ;
+        
+        <Button onClick={setReadOnly}>dd</Button>
       </EditorContainer>
 
       <Footer />
