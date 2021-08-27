@@ -1,6 +1,7 @@
 import React from "react";
 import IdInput from "../../components/LoginPage/IdInput";
 import PsInput from "../../components/LoginPage/PsInput";
+import FindIdPs from "../../components/LoginPage/FindIdPs";
 import { Container, Flex, Box, Heading } from "@chakra-ui/react";
 
 const LoginPage = () => {
@@ -11,6 +12,7 @@ const LoginPage = () => {
           <Heading width="100px" ml="200px" mt="50px">Login</Heading>
           <IdInput />
           <PsInput />
+          <FindIdPs />
         </Box>  
       </Flex>
     </Container>
