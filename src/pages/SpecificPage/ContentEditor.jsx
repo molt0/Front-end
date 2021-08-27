@@ -3,9 +3,9 @@ import styled, { css } from "styled-components";
 
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
-import FakeData from "../../fake-data/EditorData";
+import { FakeData } from "../../fake-data/EditorData";
 
-import { Button, Switch, FormLabel } from "@chakra-ui/react";
+import { Button, Switch, FormLabel, Heading } from "@chakra-ui/react";
 
 const Flex = styled.div`
   display: flex;
@@ -34,7 +34,6 @@ const EditorContainer = styled.div`
 
 const sticky = css`
   position: fixed !important;
-
 `;
 
 const Footer = styled.div`
@@ -61,8 +60,8 @@ const ContentEditor = () => {
 
   async function sendData() {
     const savedContent = await instanceRef.current.save();
-    
-    console.log("savedConent")
+
+    console.log("savedConent");
     console.log(savedContent);
   }
 
@@ -76,6 +75,10 @@ const ContentEditor = () => {
         <Flex>
           <Button size="md">❮</Button>
         </Flex>
+
+        <Heading as="h4" size="md">
+          {FakeData.document_info.title}
+        </Heading>
 
         <Flex>
           <FormLabel htmlFor="email-alerts" mb="0">
@@ -93,7 +96,7 @@ const ContentEditor = () => {
 
       <EditorContainer>
         <EditorJs
-          data={FakeData}
+          data={FakeData.document_content}
           onChange={(e) => {
             // setContent(content);
           }}

@@ -5,7 +5,7 @@ import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
 import { Button } from "@chakra-ui/react";
 
-import FakeData from "../../fake-data/EditorData"
+import { FakeData } from "../../fake-data/EditorData"
 
 const ContentViewer = () => {
   // const [content, setContent] = useState([]);
@@ -15,7 +15,7 @@ const ContentViewer = () => {
   return (
     <>
       <EditorJs 
-        data={FakeData}
+        data={FakeData.document_content}
         tools={EDITOR_JS_TOOLS}
         readOnly
       />
