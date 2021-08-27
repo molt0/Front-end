@@ -1,5 +1,11 @@
 const FakeData ={
-    "time" : 1630024793887,
+    "document_info": {
+        "title": "문서 제목(노래 제목)",
+        "artist": "아티스트 이름"
+    },
+
+    "document_content":{
+        "time" : 1630024793887,
     "blocks" : [
         {
             "id" : "pYnFEuymaC",
@@ -114,6 +120,8 @@ const FakeData ={
         }
     ],
     "version" : "2.22.2"
+    }
+    //END OF document_content
 }
 
-export default FakeData
+export { FakeData }
