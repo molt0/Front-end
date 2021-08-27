@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
+import FakeData from "../../fake-data/EditorData";
 
 import { Button, Switch, FormLabel } from "@chakra-ui/react";
 
@@ -27,7 +28,7 @@ const EditorContainer = styled.div`
   margin: 0 auto;
 
   width: 1200px;
-  height: 800px;
+  
 
   border: 1px solid #A4E8E0;
 `;
@@ -35,6 +36,9 @@ const EditorContainer = styled.div`
 const Footer = styled.div`
   width: 100%;
   height: 80px;
+
+  position: -webkit-sticky;
+  position: sticky;
 
   background-color: #ebe8e8;
 `;
@@ -64,15 +68,17 @@ const ContentEditor = () => {
           <FormLabel htmlFor="email-alerts" mb="0">
             미리보기 모드
           </FormLabel>
-          <Switch size="lg" id="email-alerts" />
+          <Switch size="lg" id="email-alerts" onChange={(e) =>{
+            setReadOnly()
+          }} />
         </Flex>
       </ControlContainer>
 
       <EditorContainer>
         <EditorJs
-          data={content}
+          data={FakeData}
           onChange={(e) => {
-            setContent(content);
+            // setContent(content);
           }}
           instanceRef={(instance) => (instanceRef.current = instance)}
           tools={EDITOR_JS_TOOLS}
