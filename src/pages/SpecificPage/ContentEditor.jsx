@@ -40,7 +40,7 @@ const Footer = styled.div`
 `;
 
 const ContentEditor = () => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState([]);
   const instanceRef = useRef(null);
 
   async function sendData() {
