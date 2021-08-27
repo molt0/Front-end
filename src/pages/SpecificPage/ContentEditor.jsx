@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
@@ -28,19 +28,31 @@ const EditorContainer = styled.div`
   margin: 0 auto;
 
   width: 1200px;
-  
 
-  border: 1px solid #A4E8E0;
+  border: 1px solid #a4e8e0;
+`;
+
+const sticky = css`
+  position: fixed !important;
+
 `;
 
 const Footer = styled.div`
-  width: 100%;
+  width: 75%;
   height: 80px;
 
-  position: -webkit-sticky;
-  position: sticky;
+  margin-left: 20px;
+  padding-left: 10px;
 
-  background-color: #ebe8e8;
+  top: 660px;
+
+  position: fixed;
+  z-index: 999;
+  ${sticky}
+
+  background-color: rgba(200, 200, 200, 0.8);
+  border: 1px solid #fadcd9;
+  border-radius: 10px;
 `;
 
 const ContentEditor = () => {
@@ -49,13 +61,14 @@ const ContentEditor = () => {
 
   async function sendData() {
     const savedContent = await instanceRef.current.save();
-  
+    
+    console.log("savedConent")
     console.log(savedContent);
   }
 
-  const setReadOnly = () =>{
+  const setReadOnly = () => {
     instanceRef.current.readOnly.toggle();
-  }
+  };
 
   return (
     <>
@@ -68,9 +81,13 @@ const ContentEditor = () => {
           <FormLabel htmlFor="email-alerts" mb="0">
             미리보기 모드
           </FormLabel>
-          <Switch size="lg" id="email-alerts" onChange={(e) =>{
-            setReadOnly()
-          }} />
+          <Switch
+            size="lg"
+            id="email-alerts"
+            onChange={(e) => {
+              setReadOnly();
+            }}
+          />
         </Flex>
       </ControlContainer>
 
@@ -83,11 +100,11 @@ const ContentEditor = () => {
           instanceRef={(instance) => (instanceRef.current = instance)}
           tools={EDITOR_JS_TOOLS}
         />
-        
-        <Button onClick={setReadOnly}>dd</Button>
-      </EditorContainer>
 
-      <Footer />
+        <Footer>
+          <Button onClick={sendData}>dd</Button>
+        </Footer>
+      </EditorContainer>
     </>
   );
 };
