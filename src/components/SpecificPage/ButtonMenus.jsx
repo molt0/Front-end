@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div>
       <Flex mt="30px">
-        <Button w="200px" colorScheme="teal" size="md" ml="500px">
+        <Button w="200px" colorScheme="teal" size="md" >
           곡 소개
         </Button>
         <Button w="200px" colorScheme="teal" size="md" variant="outline"  ml="10px">
