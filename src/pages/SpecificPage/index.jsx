@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../../components/SpecificPage/Header";
 import HeadInfo from "../../components/SpecificPage/HeadInfo";
 import ButtonMenus from "../../components/SpecificPage/ButtonMenus";
-
+import ContentViewer from "../../components/SpecificPage/ContentViewer";
 
 import { Divider, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
@@ -22,12 +22,7 @@ const SpecificPage = () => {
       <HeadInfo />
       <ButtonMenus />
 
-      <FormControl display="flex" alignItems="center">
-        <FormLabel htmlFor="email-alerts" mb="0">
-          미리보기 모드
-        </FormLabel>
-        <Switch size="lg" id="email-alerts" />
-      </FormControl>
+      <ContentViewer/>
 
       <Divider mt="30px" colorScheme="whiteAlpha" />
       <Field>
