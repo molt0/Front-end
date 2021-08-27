@@ -16,21 +16,19 @@ const PsInput = () => {
 
   return(
     <Box>
-      <InputGroup width="300px" left="100px" top="70px">
+      <InputGroup width="300px" height="50px" left="100px" top="80px">
         <Input
           pr="4.5rem"
           type={show ? "text" : "password"}
-          placeholder="Password"
+          placeholder="비밀번호"
+          height="50px"
         />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm" onClick={handleClick}>
-            {show ? "Hide" : "Show"}
+          <Button h="35px" size="sm" onClick={handleClick} top="0.32rem" mr="0.25rem">
+            {show ? "숨기기" : "보기"}
           </Button>
         </InputRightElement>
       </InputGroup>
-      <Button variant="outline" width="200px" height="50px" left="150px" top="250px" borderRadius="lg" bg="teal.300" color="#fff" fontSize="xl" fontWeight="extrabold">
-        로그인
-      </Button>
     </Box>
   );
 }

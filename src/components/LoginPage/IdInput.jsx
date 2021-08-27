@@ -10,7 +10,7 @@ import {
 const IdInput = () => {
   return(
     <Box>
-      <Input width="300px" left="100px" top="50px" placeholder="ID" />
+      <Input width="300px" height="50px" left="100px" top="50px" placeholder="아이디" />
     </Box>
   );
 }
