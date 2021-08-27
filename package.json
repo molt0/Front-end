@@ -66,5 +66,6 @@
     "@editorjs/table": "^2.0.1",
     "@editorjs/warning": "^1.2.0",
     "react-editor-js": "^1.10.0"
-  }
+  },
+  "homepage": "./"
 }
