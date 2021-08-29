@@ -8,7 +8,9 @@ import {
   Input,
   Spacer,
   Link,
-  Image
+  Image,
+  SimpleGrid,
+  Center
 } from "@chakra-ui/react";
 import {
   Drawer,
@@ -26,32 +28,55 @@ const Header = (props) => {
     const [size, setSize] = React.useState("xs")
     const changeStatus = () => setSize(size === 'xs' ? 'lg' : 'xs');
 
+    const NavList = [
+      {
+        key : 1,
+        genre : "발라드"
+      },
+      {
+        key : 2,
+        genre : "댄스"
+      },
+      {
+        key : 3,
+        genre : "POP"
+      },
+      {
+        key : 4,
+        genre : "R & B / Soul"
+      },
+      {
+        key : 5,
+        genre : "록 / 메탈"
+      }
+    ]
   return (
     <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      padding={5}
-      bg="teal.300"
+      pos= "fixed"
+      padding="11.5px"
+      w="100%"
+      bg= {props.bgColor}
+      backdropFilter= {props.bgblur}  
+      t= "0" l= "0" r= "0"
       color="white"
+      align="center"
+      transition= "all ease 1s 0s"
       {...props}
-      >
+    >
       <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={"tighter"} ml={10}>
+        <Heading as="h1" fontSize="30px" letterSpacing={"tighter"} ml="100px">
           Molto
         </Heading>
       </Flex>
-
+      
       <Spacer />
       <Stack w="500px" mr="10" spacing={3}>
-        <Input variant="filled" color="black" placeholder="검색" />
+        <Input ml="60px" h="35px" w="430px" borderRadius="7px" variant="outline" color="black" fontSize="14px" bg="white" placeholder="검색" />
       </Stack>
       
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+      <Button position="fix" size="sm" mr="40px" ref={btnRef} colorScheme="teal" onClick={onOpen}>
         <HamburgerIcon />
       </Button>
-      
       {/* sidebar */}
       <Drawer
         isOpen={isOpen}
@@ -85,10 +110,18 @@ const Header = (props) => {
                 <Button variant="outline" onClick={() => changeStatus()}>
                     프로필 수정
                 </Button>
-                
-                  <Link color="teal.500" href="#">
-                    도움말
-                  </Link>
+                {
+                  NavList.map(Items => (
+                    <Center>
+                      <SimpleGrid columns={1} width="100%" height="60px" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="lg" bg="#fbfbfb;">
+                      <Link color="teal.500" href="/editor">
+                        {Items.genre}
+                      </Link>  
+                    </SimpleGrid>
+                    </Center>
+                    
+                  ))
+                }  
                 </DrawerBody>
               )
             }
