@@ -1,21 +1,30 @@
 import React from "react";
+import Desc_slide from "../../components/MainPage/Desc_slide";
 import RecentSearch from "../../components/MainPage/RecentSearch";
-import Rank_Top100 from "../../components/MainPage/Rank_Top100";
-import Rank_Day from "../../components/MainPage/Rank_Day";
-import Rank_Week from "../../components/MainPage/Rank_Week";
-import { Container, Flex, Heading } from "@chakra-ui/react";
+import Rank_Top100 from "../../components/MainPage/ranking/Rank_Top100";
+import Rank_Day from "../../components/MainPage/ranking/Rank_Day";
+import Rank_Week from "../../components/MainPage/ranking/Rank_Week";
+import Footer from '../../components/MainPage/Footer'
+
+import { Container, Flex, Heading, Spacer } from "@chakra-ui/react";
 
 const MainPage = () => {
   return (
-    <Container maxW="1500px" mx="auto">
-      <RecentSearch />
-      <Flex mt="100px">
-        <Heading size="lg" color="gray.500">MUSIC RANKING</Heading>
-        <Rank_Top100 />
-        <Rank_Day />
-        <Rank_Week />
-      </Flex>
-    </Container>
+    <>
+      <Desc_slide />
+      <Container maxW="1100px" mx="auto">  
+        <RecentSearch />
+        <Flex mt="100px">
+          <Heading fontSize="30px" color="gray.500" mr="30px">MUSIC<br/>RANKING</Heading>
+          <Rank_Top100 />
+          <Spacer /> 
+          <Rank_Day />
+          <Spacer />
+          <Rank_Week />
+        </Flex>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
