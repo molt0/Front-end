@@ -5,7 +5,7 @@ import {
   Heading, 
  } from "@chakra-ui/react";
 
-const Header = () => {
+const SHeader = () => {
   return(
     <div>
         <Box ml="300px" mt="30px" >
@@ -15,4 +15,4 @@ const Header = () => {
   );
 }
 
-export default Header;
+export default SHeader;

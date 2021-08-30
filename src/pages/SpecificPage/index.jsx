@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../../components/SpecificPage/Header";
+import SHeader from "../../components/SpecificPage/Header";
 import HeadInfo from "../../components/SpecificPage/HeadInfo";
 import ButtonMenus from "../../components/SpecificPage/ButtonMenus";
 import ContentViewer from "../../components/SpecificPage/ContentViewer";
@@ -18,7 +18,7 @@ const Field = styled.div`
 const SpecificPage = () => {
   return (
     <div>
-      <Header />
+      <SHeader />
       <HeadInfo />
       <ButtonMenus />
 

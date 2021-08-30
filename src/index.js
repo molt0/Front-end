@@ -10,11 +10,11 @@ import { ChakraProvider } from "@chakra-ui/react"
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/4">
         <Route exact path="/" component={MainPage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/editor" component={ContentEditor} />
-        <Route exact path="/specific" component={SpecificPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/editor" component={ContentEditor} />
+        <Route path="/specific" component={SpecificPage} />
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>,
