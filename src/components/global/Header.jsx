@@ -28,6 +28,7 @@ const Header = (props) => {
     const [size, setSize] = React.useState("xs")
     const changeStatus = () => setSize(size === 'xs' ? 'lg' : 'xs');
 
+
     const NavList = [
       {
         key : 1,
@@ -111,17 +112,23 @@ const Header = (props) => {
                     프로필 수정
                 </Button>
                 {
-                  NavList.map(Items => (
-                    <Center>
-                      <SimpleGrid columns={1} width="100%" height="60px" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="lg" bg="#fbfbfb;">
-                      <Link color="teal.500" href="/editor">
-                        {Items.genre}
-                      </Link>  
-                    </SimpleGrid>
-                    </Center>
-                    
+                  <Collapse startingHeight={100} in={show}>
+                  <SimpleGrid columns={1} spacingX="100px">
+                  {
+                    NavList.map(Items => (
+                      <Center>
+                        <SimpleGrid columns={1} width="100%" height="60px" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="lg" bg="#fbfbfb;">
+                        <Link color="teal.500" href="/editor">
+                          {Items.genre}
+                        </Link>  
+                      </SimpleGrid>
+                      </Center>
                   ))
-                }  
+                }
+                  </SimpleGrid>
+                </Collapse>
+                }
+                
                 </DrawerBody>
               )
             }

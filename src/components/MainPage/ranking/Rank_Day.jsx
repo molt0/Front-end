@@ -27,7 +27,7 @@ const Rank_Day = () => {
   var rank = 0;  
   useEffect(() =>  {
       request(url, function(error, response, html){
-        if (!error && rank <100) {
+        if (!error && rank <10) {
           var $ = cheerio.load(html);
           
           $('.image_typeAll>img').each(function(){
@@ -51,6 +51,7 @@ const Rank_Day = () => {
           })  
         }
         rank++;
+        console.log(rank);
       });
     },[])
   

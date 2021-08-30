@@ -26,7 +26,7 @@ const Rank_Week = () => {
   var rank = 10;  
   useEffect(() =>  {
       request(url, function(error, response, html){
-        if (!error) {
+        if (!error && rank <10) {
           var $ = cheerio.load(html);
           
           $('.image_typeAll>img').each(function(){
