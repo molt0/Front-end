@@ -105,7 +105,7 @@ const ContentEditor = () => {
         />
 
         <Footer>
-          <Button onClick={sendData}>dd</Button>
+          <Button colorScheme="green" onClick={sendData}>저장</Button>
         </Footer>
       </EditorContainer>
     </>
