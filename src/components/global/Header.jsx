@@ -11,7 +11,8 @@ import {
   Image,
   SimpleGrid,
   Center,
-  Collapse
+  Collapse,
+  Box
 } from "@chakra-ui/react";
 import {
   Drawer,
@@ -31,36 +32,8 @@ const Header = (props) => {
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
 
-  const genre = [
-    {
-      key: 1,
-      name: "K-POP"
-    },
-    {
-      key: 2,
-      name: "POP"
-    },
-    {
-      key: 3,
-      name: "ROCK"
-    },
-    {
-      key: 4,
-      name: "ELEC"
-    },
-    {
-      key: 5,
-      name: "RAP"
-    },
-    {
-      key: 6,
-      name: "RNB"
-    },
-    {
-      key: 7,
-      name: "FOLK"
-    },
-  ]
+  const genrecount = [ "KPOP", "POP", "ROCK", "ELEC", "RAP", "RNB"]
+
   const KPOP = [
     {
       key: 1,
@@ -68,7 +41,11 @@ const Header = (props) => {
     },
     {
       key: 2,
-      genre: "발라드"
+      genre: [
+        "발라드",
+        "뭐",
+        "왜"
+      ]
     },
     {
       key: 3,
@@ -254,27 +231,24 @@ const Header = (props) => {
                   {
                     <SimpleGrid columns={1} spacingX="100px">
                       <Center>
-                        <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="lg" bg="#fbfbfb;">
+                      {
+                        KPOP.map(Items => (
                           {
-                            genre.map(menu => (
-                              <Collapse startingHeight={50} in={show}>
-                              {
-                                [menu.name].map(Items => (
-                                  console.log(menu.name),
-                                  <Flex>
-                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
-                                      {Items.genre}
-                                    </Link>
-                                    <Button size="sm" onClick={handleToggle} mt="1rem">
-                                      {show ? <ChevronDownIcon /> : <ChevronUpIcon />}
-                                    </Button>
-                                  </Flex>
-                                ))
-                              }
-                              </Collapse>
+                            KPOP.map(Items => (
+                              <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="lg" bg="#fbfbfb;">
+                                <Flex>
+                                  <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                    {Items.genre}
+                                  </Link>
+                                  <Button size="sm" onClick={handleToggle} mt="1rem">
+                                    {show ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                                  </Button>
+                                </Flex>
+                              </SimpleGrid>
                             ))
                           }
-                        </SimpleGrid>
+                        ))
+                    }
                       </Center>
                     </SimpleGrid>
                   }
