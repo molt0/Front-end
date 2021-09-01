@@ -37,13 +37,14 @@ const sticky = css`
 `;
 
 const Footer = styled.div`
-  width: 75%;
+  width: 72rem;
   height: 80px;
 
   margin-left: 20px;
+  padding-top: 20px;
   padding-left: 10px;
 
-  top: 660px;
+  top: 90%;
 
   position: fixed;
   z-index: 999;
@@ -52,6 +53,14 @@ const Footer = styled.div`
   background-color: rgba(200, 200, 200, 0.8);
   border: 1px solid #fadcd9;
   border-radius: 10px;
+
+  @media only screen and (max-width: 1600px) {
+    width: 70rem;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    width: 90%;
+  }
 `;
 
 const ContentEditor = () => {
