@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
 import EditorJs from "react-editor-js";
@@ -22,7 +22,14 @@ const ControlContainer = styled.div`
   justify-content: space-between;
 
   background-color: #fbfbfb;
+
+  & Button{
+    margin-left: 20px;
+  }
+
+  
 `;
+
 
 const EditorContainer = styled.div`
   margin: 0 auto;
@@ -37,12 +44,14 @@ const sticky = css`
 `;
 
 const Footer = styled.div`
+ 
   width: 72rem;
   height: 80px;
 
+  display: flex;
+  justify-content: space-between;
+
   margin-left: 20px;
-  padding-top: 20px;
-  padding-left: 10px;
 
   top: 90%;
 
@@ -54,6 +63,12 @@ const Footer = styled.div`
   border: 1px solid #fadcd9;
   border-radius: 10px;
 
+  & Button{
+    float: right;
+    margin-top: 17px;
+    margin-right: 25px;
+  }
+
   @media only screen and (max-width: 1600px) {
     width: 70rem;
   }
@@ -63,9 +78,32 @@ const Footer = styled.div`
   }
 `;
 
+const DocName = styled.div`
+  display: ${footerVisiable => footerVisiable || 'none'};
+  width: 300px;
+  height: inherit;
+
+  margin-top: 17px;
+`
+
 const ContentEditor = () => {
   const [content, setContent] = useState([]);
   const instanceRef = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [footerVisiable, setVisable] = useState(0);
+
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+}
+
+  
+  useEffect(()=>{
+    var toolbar;
+      window.addEventListener('scroll', updateScroll);
+      toolbar = scrollPosition > 100 ? "block" : "none";
+      setVisable(toolbar)
+      console.log(footerVisiable)
+  });
 
   async function sendData() {
     const savedContent = await instanceRef.current.save();
@@ -114,6 +152,8 @@ const ContentEditor = () => {
         />
 
         <Footer>
+          <DocName>{FakeData.document_info.title}</DocName>
+          
           <Button colorScheme="green" onClick={sendData}>저장</Button>
         </Footer>
       </EditorContainer>
