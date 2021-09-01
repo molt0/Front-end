@@ -25,6 +25,7 @@ const ControlContainer = styled.div`
 
   & Button{
     margin-left: 20px;
+    float: right;
   }
 
   
@@ -79,7 +80,10 @@ const Footer = styled.div`
 `;
 
 const DocName = styled.div`
-  display: ${footerVisiable => footerVisiable || 'none'};
+  &p{
+    display: none;
+  }
+  
   width: 300px;
   height: inherit;
 
@@ -152,7 +156,7 @@ const ContentEditor = () => {
         />
 
         <Footer>
-          <DocName>{FakeData.document_info.title}</DocName>
+          <DocName><p>{FakeData.document_info.title}</p></DocName>
           
           <Button colorScheme="green" onClick={sendData}>저장</Button>
         </Footer>
