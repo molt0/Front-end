@@ -1,37 +1,18 @@
 import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { Box, Heading, Button, Container } from "@chakra-ui/react";
 
+
 const RecentSearch = () => {
-  return (
+  return(
     <Box mt="100px">
-      <Heading size="sm" color="gray.500">
-        최근 목록
-      </Heading>
-      <Box
-        width="1100px"
-        height="150px"
-        maxW="1100px"
-        mx="auto"
-        mt="10px"
-        borderRadius="md"
-        boxShadow="lg"
-        bg="#fbfbfb;"
-      >
-        <Link to="./login">
-          <Button className="btn" variant="outline" width="140px" height="37px" left="44%" top="35%" borderRadius="lg"
-            bg="teal.300"
-            color="#fff"
-            fontSize="sm"
-            fontWeight="extrabold"
-          >
-            로그인
-          </Button>
-        </Link>
+      <Heading size="sm" color="gray.500">최근 목록</Heading>
+      <Box width="1100px" height="150px" maxW="1100px" mx="auto" mt="10px" borderRadius="md" boxShadow="lg" bg="#fbfbfb;">
+        <Button className="btn" variant="outline" width="140px" height="37px" left="44%" top="35%" borderRadius="lg" bg="teal.300" color="#fff" fontSize="sm" fontWeight="extrabold">
+          로그인
+        </Button>
       </Box>
     </Box>
   );
-};
+}
 
 export default RecentSearch;
