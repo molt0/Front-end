@@ -7,27 +7,30 @@ import ContentViewer from "../../components/SpecificPage/ContentViewer";
 
 import { Divider, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
-const Field = styled.div`
-  width: 90%;
-  height: 90%;
-
+const ContentContainer = styled.div`
   margin: 0 auto;
-  margin-top: 10px;
+
+  width: 1200px;
+
+  box-shadow: 10px 4px 106px 12px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 10px 4px 106px 12px rgba(0,0,0,0.1);
+  -moz-box-shadow: 10px 4px 106px 12px rgba(0,0,0,0.1);
+
+  border-radius: 20px;
 `;
 
 const SpecificPage = () => {
   return (
     <div>
-      <SHeader />
-      <HeadInfo />
-      <ButtonMenus />
+      <ContentContainer>
+        <SHeader />
+        <HeadInfo />
+        <ButtonMenus />
 
-      <ContentViewer/>
+        <ContentViewer/>
 
-      <Divider mt="30px" colorScheme="whiteAlpha" />
-      <Field>
-        
-      </Field>
+        <Divider mt="30px" colorScheme="whiteAlpha" />
+      </ContentContainer>
     </div>
   );
 };

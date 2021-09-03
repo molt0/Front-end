@@ -5,7 +5,7 @@ import { Button, Flex } from "@chakra-ui/react";
 const Header = () => {
   return (
     <div>
-      <Flex mt="30px">
+      <Flex mt="30px" ml="50px">
         <Button w="200px" colorScheme="teal" size="md" >
           곡 소개
         </Button>
