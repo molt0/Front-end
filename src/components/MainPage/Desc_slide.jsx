@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../global/Header";
-import { Box } from "@chakra-ui/react";
-import cat from './cat.jpg';
+import { Box, Center, Heading } from "@chakra-ui/react";
+import Img from './MainSlide.png';
 
 const HeaderMenu = styled(Header)`
   z-index: 999;
@@ -28,10 +28,9 @@ const Desc_slide = () => {
   return (
     <>
       <HeaderMenu bgColor={MainbgColor} bgblur="blur(10px)" />
-      <Box w="100%" h="450px" backgroundImage={cat} bgColor="orange.200" backgroundSize="cover" backgroundRepeat="no-repeat">
-        <>
-          asdf
-      </>
+      <Box w="100%" h="450px" backgroundImage={Img} bgColor="orange.200" backgroundSize="cover" backgroundRepeat="no-repeat">
+        <Center>
+          </Center>
       </Box>
     </>
   );
