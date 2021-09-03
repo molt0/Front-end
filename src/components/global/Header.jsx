@@ -26,7 +26,7 @@ const Header = (props) => {
     const btnRef = React.useRef()
     const {isOpen, onOpen, onClose } = useDisclosure()
     const [size, setSize] = React.useState("xs")
-    const changeStatus = () => setSize(size === 'xs' ? 'lg' : 'xs');
+    const changeStatus = () => setSize(prevSize => size === 'xs' ? 'lg' : 'xs');
 
     const NavList = [
       {
