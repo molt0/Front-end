@@ -10,7 +10,7 @@ import {
   Link,
   Image,
   SimpleGrid,
-  Center
+  Collapse,
 } from "@chakra-ui/react";
 import {
   Drawer,
@@ -20,47 +20,140 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+
+import { HamburgerIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 const Header = (props) => {
-    const btnRef = React.useRef()
-    const {isOpen, onOpen, onClose } = useDisclosure()
-    const [size, setSize] = React.useState("xs")
-    const changeStatus = () => setSize(prevSize => size === 'xs' ? 'lg' : 'xs');
+  const btnRef = React.useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [size, setSize] = React.useState("xs")
+  const changeStatus = () => setSize(size === 'xs' ? 'lg' : 'xs');
+  const [show, setShow] = React.useState(false)
+  const handleToggle = () => setShow(!show)
 
-    const NavList = [
-      {
-        key : 1,
-        genre : "발라드"
-      },
-      {
-        key : 2,
-        genre : "댄스"
-      },
-      {
-        key : 3,
-        genre : "POP"
-      },
-      {
-        key : 4,
-        genre : "R & B / Soul"
-      },
-      {
-        key : 5,
-        genre : "록 / 메탈"
-      }
-    ]
+  const genrecount = [ "KPOP", "POP", "ROCK", "ELEC", "RAP", "RNB"]
+
+  const KPOP = [
+    {
+      key: 1,
+      genre: "K-POP"
+    },
+    {
+      genre: [
+        "발라드",
+      ]
+    },
+    {
+      genre: "댄스"
+    }
+  ]
+  const POP = [
+    {
+      key: 1,
+      genre: "POP"
+    },
+    {
+      genre: "얼터너티브팝"
+    },
+    {
+      genre: "올디스"
+    }
+  ]
+  const ROCK = [
+    {
+      key: 1,
+      genre: "록 / 메탈"
+    },
+    {
+      genre: "모던록"
+    },
+    {
+      genre: "얼터너티브록"
+    },
+    {
+      genre: "프로그레시브/아트록"
+    },
+    {
+      genre: "하드록"
+    },
+    {
+      genre: "헤비메탈"
+    },
+    {
+      genre: "뉴메탈/하드코어"
+    },
+    {
+      genre: "포스트록"
+    }
+  ]
+  const ELEC = [
+    {
+      key: 1,
+      genre: "일렉트로니카"
+    },
+    {
+      genre: "하우스"
+    },
+    {
+      genre: "클럽뮤직"
+    }
+  ]
+  const RAP = [
+    {
+      key: 1,
+      genre: "랩 / 힙합"
+    },
+    {
+      genre: "팝랩"
+    },
+    {
+      genre: "얼터너티브힙합"
+    },
+    {
+      genre: "갱스터/하드코어랩"
+    },
+    {
+      genre: "East&West"
+    }
+  ]
+  const RNB = [
+    {
+      key: 1,
+      genre: "R&B / SOUL"
+    },
+    {
+      genre: "R&B"
+    },
+    {
+      genre: "SOUL"
+    },
+    {
+      genre: "URBAN"
+    }
+  ]
+  const FOLK = [
+    {
+      key: 1,
+      genre: "포크"
+    },
+    {
+      genre: "블루스"
+    },
+    {
+      genre: "컨트리"
+    }
+  ]
   return (
     <Flex
-      pos= "fixed"
+      pos="fixed"
       padding="11.5px"
       w="100%"
-      bg= {props.bgColor}
-      backdropFilter= {props.bgblur}  
-      t= "0" l= "0" r= "0"
+      bg={props.bgColor}
+      backdropFilter={props.bgblur}
+      t="0" l="0" r="0"
       color="white"
       align="center"
-      transition= "all ease 1s 0s"
+      transition="all ease 1s 0s"
       {...props}
     >
       <Flex align="center" mr={5}>
@@ -68,12 +161,12 @@ const Header = (props) => {
           Molto
         </Heading>
       </Flex>
-      
+
       <Spacer />
       <Stack w="500px" mr="10" spacing={3}>
         <Input ml="60px" h="35px" w="430px" borderRadius="7px" variant="outline" color="black" fontSize="14px" bg="white" placeholder="검색" />
       </Stack>
-      
+
       <Button position="fix" size="sm" mr="40px" ref={btnRef} colorScheme="teal" onClick={onOpen}>
         <HamburgerIcon />
       </Button>
@@ -88,44 +181,156 @@ const Header = (props) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-            {
-              size === "lg" ?
-              (                 
+          {
+            size === "lg" ?
+              (
                 <DrawerFooter>
-                    <Button variant="outline" m="30px" onClick={() => changeStatus()}>
-                      Cancel
+                  <Button variant="outline" m="30px" onClick={() => changeStatus()}>
+                    Cancel
                     </Button>
-                    <Button colorScheme="blue" onClick={() => changeStatus()}>Save</Button>
+                  <Button colorScheme="blue" onClick={() => changeStatus()}>Save</Button>
                 </DrawerFooter>
               ) :
               (
                 <DrawerBody>
-                <Image
-                  boxSize="2rem"
-                  borderRadius="full"
-                  src="https://placekitten.com/100/100"
-                  alt="Fluffybuns the destroyer"
-                  m="12px"
-                />
-                <Button variant="outline" onClick={() => changeStatus()}>
+                  <Image
+                    boxSize="2rem"
+                    borderRadius="full"
+                    src="https://placekitten.com/100/100"
+                    alt="Fluffybuns the destroyer"
+                    m="12px"
+                  />
+                  <Button variant="outline" onClick={() => changeStatus()}>
                     프로필 수정
-                </Button>
-                {
-                  NavList.map(Items => (
-                    <Center>
-                      <SimpleGrid columns={1} width="100%" height="60px" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="lg" bg="#fbfbfb;">
-                      <Link color="teal.500" href="/editor">
-                        {Items.genre}
-                      </Link>  
-                    </SimpleGrid>
-                    </Center>
-                    
-                  ))
-                }  
+                  </Button>
+                      {/* {
+                        genrecount.map(Items => (   */}
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              KPOP.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              POP.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              ROCK.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              ELEC.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              RAP.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              RNB.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                          <SimpleGrid columns={1} width="100%" textAlign="center" mt="10px" ml="10px" lineHeight="60px" fontSize="20px" fontWeight="extrabold" borderRadius="lg" boxShadow="sm" bg="#fafafa;">
+                            <Collapse startingHeight={60} in={show}>
+                            {
+                              FOLK.map(Items => (
+                                  <Flex>
+                                    <Link color="teal.500" width="100%" height="60px" w="100%" href="/editor">
+                                      {Items.genre}
+                                    </Link>
+                                    {Items.key == 1 ? <Button size="sm" onClick={handleToggle} mt="1rem" mr="10px" bg="none">
+                                      {show ? <ChevronDownIcon size="lg"/> : <ChevronUpIcon />}
+                                      </Button> : ""
+                                      }
+                                  </Flex>
+                              ))
+                            }
+                            </Collapse>
+                          </SimpleGrid>
+                        {/* ))
+                      } */}
+                     
                 </DrawerBody>
               )
-            }
-          </DrawerContent>
+          }
+        </DrawerContent>
       </Drawer>
     </Flex>
   );
