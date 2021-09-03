@@ -26,7 +26,7 @@ const Rank_Top100 = () => {
   var rank = 10;  
   useEffect(() =>  {
       request(url, function(error, response, html){
-        if (!error && rank <10) {
+        if (!error) {
           var $ = cheerio.load(html);
           
           $('.image_typeAll>img').each(function(){

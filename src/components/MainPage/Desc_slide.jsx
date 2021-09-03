@@ -4,7 +4,6 @@ import Header from "../global/Header";
 import { Box } from "@chakra-ui/react";
 import cat from './cat.jpg';
 
-
 const HeaderMenu = styled(Header)`
   z-index: 999;
 `

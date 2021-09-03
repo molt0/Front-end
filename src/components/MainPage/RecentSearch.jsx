@@ -1,11 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import {
-  Box,
-  Heading, 
-  Button,
-  Container
-} from "@chakra-ui/react";
+import { Box, Heading, Button, Container } from "@chakra-ui/react";
 
 
 const RecentSearch = () => {
