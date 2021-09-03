@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
+
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
 import { FakeData } from "../../fake-data/EditorData";
 
 import { Button, Switch, FormLabel, Heading } from "@chakra-ui/react";
 
+const keyframes = require('styled-components').keyframes
 const Flex = styled.div`
   display: flex;
 `;
@@ -44,17 +46,60 @@ const sticky = css`
   position: fixed !important;
 `;
 
+const fadeIn = keyframes`
+  from {
+    transform: scale(.25);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(.25);
+    opacity: 0;
+  }
+`;
+
 const Footer = styled.div`
- 
-  width: 72rem;
+  display: inline-block;
+  display: ${props => props.visibilty ? 'block' : 'none'};
+  
   height: 80px;
 
-  display: flex;
+  @media only screen and (max-width: 1600px) {
+    width: 70rem;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    width: 90%;
+  }
+  
+  animation: ${props => props.visibilty ? fadeIn : fadeOut};
+  transition: visibility 1s linear;
+`;
+
+const FooterFlex = styled.div`
   justify-content: space-between;
 
-  margin-left: 20px;
-
+  display: flex;
   top: 90%;
+  right: 0;
+  margin-right: 170px;
+
+  width: 400px;
+  height: 65px;
+
+  
 
   position: fixed;
   z-index: 999;
@@ -66,35 +111,22 @@ const Footer = styled.div`
 
   & Button{
     float: right;
-    margin-top: 17px;
+    margin-top: 10px;
     margin-right: 25px;
   }
-
-  @media only screen and (max-width: 1600px) {
-    width: 70rem;
-  }
-
-  @media only screen and (max-width: 1300px) {
-    width: 90%;
-  }
-`;
+`
 
 const DocName = styled.div`
-  &p{
-    display: none;
-  }
-  
-  width: 300px;
-  height: inherit;
 
-  margin-top: 17px;
+  margin-top: 20px;
+  margin-left: 20px;
 `
 
 const ContentEditor = () => {
   const [content, setContent] = useState([]);
   const instanceRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [footerVisiable, setVisable] = useState(0);
+  const [footerVisible, setVisible] = useState(false);
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -102,11 +134,9 @@ const ContentEditor = () => {
 
   
   useEffect(()=>{
-    var toolbar;
       window.addEventListener('scroll', updateScroll);
-      toolbar = scrollPosition > 100 ? "block" : "none";
-      setVisable(toolbar)
-      console.log(footerVisiable)
+      setVisible(scrollPosition > 100 ? true : false)
+      console.log(footerVisible)
   });
 
   async function sendData() {
@@ -155,10 +185,12 @@ const ContentEditor = () => {
           tools={EDITOR_JS_TOOLS}
         />
 
-        <Footer>
-          <DocName><p>{FakeData.document_info.title}</p></DocName>
-          
-          <Button colorScheme="green" onClick={sendData}>저장</Button>
+        <Footer visibilty={footerVisible}>
+          <FooterFlex>
+            <DocName><p>{FakeData.document_info.title}</p></DocName>
+            
+            <Button colorScheme="green" onClick={sendData}>저장</Button>
+          </FooterFlex>
         </Footer>
       </EditorContainer>
     </>
