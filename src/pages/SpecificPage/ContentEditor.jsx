@@ -141,6 +141,7 @@ const ContentEditor = () => {
         </Heading>
 
         <Flex>
+        <Button colorScheme="green" onClick={sendData}>저장</Button>
           <FormLabel htmlFor="email-alerts" mb="0">
             미리보기 모드
           </FormLabel>
@@ -163,7 +164,7 @@ const ContentEditor = () => {
           instanceRef={(instance) => (instanceRef.current = instance)}
           tools={EDITOR_JS_TOOLS}
         />
-
+        
         
       </EditorContainer>
 
