@@ -35,6 +35,7 @@ const ControlContainer = styled.div`
 
 
 const EditorContainer = styled.div`
+  z-index: 0;
   margin: 0 auto;
 
   width: 1200px;
@@ -46,34 +47,14 @@ const sticky = css`
   position: fixed !important;
 `;
 
-const fadeIn = keyframes`
-  from {
-    transform: scale(.25);
-    opacity: 0;
-  }
 
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-`;
+const Toolbar = styled.div`
+  z-index: 999;
 
-const fadeOut = keyframes`
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(.25);
-    opacity: 0;
-  }
-`;
-
-const Footer = styled.div`
   display: inline-block;
-  display: ${props => props.visibilty ? 'block' : 'none'};
-  
+  opacity: ${props => props.visibilty ? 1 : 0};
+  transition: all 0.3s ease-in-out;
+
   height: 80px;
 
   @media only screen and (max-width: 1600px) {
@@ -84,11 +65,9 @@ const Footer = styled.div`
     width: 90%;
   }
   
-  animation: ${props => props.visibilty ? fadeIn : fadeOut};
-  transition: visibility 1s linear;
 `;
 
-const FooterFlex = styled.div`
+const ToolbarFlex = styled.div`
   justify-content: space-between;
 
   display: flex;
@@ -135,7 +114,7 @@ const ContentEditor = () => {
   
   useEffect(()=>{
       window.addEventListener('scroll', updateScroll);
-      setVisible(scrollPosition > 100 ? true : false)
+      setVisible(scrollPosition > 80 ? true : false)
       console.log(footerVisible)
   });
 
@@ -185,14 +164,16 @@ const ContentEditor = () => {
           tools={EDITOR_JS_TOOLS}
         />
 
-        <Footer visibilty={footerVisible}>
-          <FooterFlex>
+        
+      </EditorContainer>
+
+      <Toolbar visibilty={footerVisible}>
+          <ToolbarFlex>
             <DocName><p>{FakeData.document_info.title}</p></DocName>
             
             <Button colorScheme="green" onClick={sendData}>저장</Button>
-          </FooterFlex>
-        </Footer>
-      </EditorContainer>
+          </ToolbarFlex>
+      </Toolbar>
     </>
   );
 };
