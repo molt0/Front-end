@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
-
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
 import { FakeData } from "../../fake-data/EditorData";
@@ -10,7 +9,17 @@ import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Switch, FormLabel, Heading } from "@chakra-ui/react";
 
-const keyframes = require('styled-components').keyframes
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure
+} from "@chakra-ui/react"
+
 const Flex = styled.div`
   display: flex;
 `;
@@ -36,6 +45,23 @@ const ControlContainer = styled.div`
   
 `;
 
+const InfoBtn = styled.div`
+  cursor: pointer;
+
+  width: 250px;
+  height: 50px;
+  
+  margin-left: 100px;
+
+  text-align: center;
+  border-radius: 30px;
+
+  transition: 0.1s ease-in-out;
+  &:hover{
+    background-color: #e6e6e6;
+    transform: scale(1.05)
+  }
+`;
 
 const EditorContainer = styled.div`
   z-index: 0;
@@ -113,6 +139,9 @@ const ContentEditor = () => {
   const instanceRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
+  //Modal
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -142,21 +171,46 @@ const ContentEditor = () => {
     instanceRef.current.readOnly.toggle();
   };
 
+  const openModal = () =>{
+
+  }
+
   return (
     <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>정보 수정</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            모달 테스트
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <ControlContainer>
         <Flex>
           <Button size="md">❮</Button>
         </Flex>
 
-        <Heading as="h4" size="md" ml="100px" mt="10px">
-          {FakeData.document_info.title}
-        </Heading>
+        <InfoBtn onClick={onOpen}>
+          <Heading as="h4" size="md" mt="13px">
+            {FakeData.document_info.title}
+          </Heading>
+        </InfoBtn>
+
 
         <Flex>
-          <FormLabel htmlFor="email-alerts" mb="0" mt="13px" fontSize="14px">
-            미리보기 모드
-          </FormLabel>
+            <FormLabel htmlFor="email-alerts" mb="0" mt="13px" fontSize="14px">
+              미리보기 모드
+            </FormLabel> 
           <Switch
             mt="8px"
             size="lg"
