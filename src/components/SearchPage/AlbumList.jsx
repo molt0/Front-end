@@ -14,22 +14,22 @@ import Album from "./Album"
 const albums = () =>{
   // 긁어온 음원 목록 (원본)
   const [moltoList, setmoltoList] = useState([
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목1", time:200, like:4431, date: new Date("2021-09-05")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목2", time:200, like:322, date: new Date("2021-09-01")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목3", time:200, like:333, date: new Date("2021-09-05")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목4", time:200, like:241, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목5", time:200, like:5546, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목6", time:200, like:6432, date: new Date("2021-09-04")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목7", time:200, like:4327, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목8", time:200, like:844, date: new Date("2021-09-04")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목9", time:200, like:9131, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목10", time:200, like:1220, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목11", time:200, like:1333, date: new Date("2021-09-04")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목12", time:200, like:1132, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목13", time:200, like:113, date: new Date("2021-09-02")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목14", time:200, like:1321, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목15", time:200, like:3211, date: new Date("2021-09-03")},
-    {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목16", time:200, like:32, date: new Date("2021-09-01")}
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목1", time:200, like:4431, date: new Date("2021-09-05")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목2", time:200, like:322, date: new Date("2021-09-01")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목3", time:200, like:333, date: new Date("2021-09-05")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목4", time:200, like:241, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목5", time:200, like:5546, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목6", time:200, like:6432, date: new Date("2021-09-04")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목7", time:200, like:4327, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목8", time:200, like:844, date: new Date("2021-09-04")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목9", time:200, like:9131, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목10", time:200, like:1220, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목11", time:200, like:1333, date: new Date("2021-09-04")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목12", time:200, like:1132, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목13", time:200, like:113, date: new Date("2021-09-02")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목14", time:200, like:1321, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목15", time:200, like:3211, date: new Date("2021-09-03")},
+    {img:"https://via.placeholder.com/150x150", artist:"아티스트_이름", name:"노래_제목16", time:200, like:32, date: new Date("2021-09-01")}
   ])
 
   // 정렬을 거친 음원 목록

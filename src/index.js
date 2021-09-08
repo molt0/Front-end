@@ -18,7 +18,7 @@ ReactDOM.render(
         <Route path="/login" component={LoginPage} />
         <Route path="/editor" component={ContentEditor} />
         <Route path="/specific" component={SpecificPage} />
-        <Route path="/Search" component={SearchPage} />
+        <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
       </BrowserRouter>
