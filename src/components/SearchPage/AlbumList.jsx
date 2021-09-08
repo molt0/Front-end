@@ -85,7 +85,7 @@ const albums = () =>{
         </Box>
 
         <Flex flex="2" justifyContent="space-around">
-          <RadioGroup>
+          <RadioGroup w="200px" >
             <Stack direction="row">
               <Radio value="최신순" onChange={latest} >최신순</Radio>
               <Radio value="인기순" onChange={trend} >인기순</Radio>
