@@ -16,10 +16,10 @@ const Header = () => {
           정보
         </Button>
         <Button w="200px" colorScheme="teal" size="md" variant="outline"  ml="10px">
-          관련 미디어
+          기타
         </Button>
         <Button w="200px" colorScheme="teal" size="md" variant="outline"  ml="10px">
-          기타
+          수정
         </Button>
       </Flex>
     </div>
