@@ -41,6 +41,10 @@ const EditorContainer = styled.div`
   width: 1200px;
 
   border: 1px solid #a4e8e0;
+
+  box-shadow: 10px 4px 106px 12px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 10px 4px 106px 12px rgba(0,0,0,0.1);
+  -moz-box-shadow: 10px 4px 106px 12px rgba(0,0,0,0.1);
 `;
 
 const sticky = css`
