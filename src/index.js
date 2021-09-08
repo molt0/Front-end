@@ -9,6 +9,7 @@ import SignUpPage from './pages/SignUpPage'
 import ContentEditor from './pages/SpecificPage/ContentEditor'
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ChakraProvider } from "@chakra-ui/react"
+import { ToastContainer } from "react-toastify"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
       </BrowserRouter>
+      <ToastContainer />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
