@@ -6,6 +6,8 @@ import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
 import { FakeData } from "../../fake-data/EditorData";
 
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Switch, FormLabel, Heading } from "@chakra-ui/react";
 
 const keyframes = require('styled-components').keyframes
@@ -29,6 +31,7 @@ const ControlContainer = styled.div`
     margin-left: 20px;
     float: right;
   }
+
 
   
 `;
@@ -127,6 +130,12 @@ const ContentEditor = () => {
 
     console.log("savedConent");
     console.log(savedContent);
+    
+    toast.success("저장이 완료되었습니다!",
+      {position: "bottom-left"},
+      {autoClose: 1500},
+      {theme: "colored"}
+    );
   }
 
   const setReadOnly = () => {
@@ -140,22 +149,23 @@ const ContentEditor = () => {
           <Button size="md">❮</Button>
         </Flex>
 
-        <Heading as="h4" size="md">
+        <Heading as="h4" size="md" ml="100px" mt="10px">
           {FakeData.document_info.title}
         </Heading>
 
         <Flex>
-        <Button colorScheme="green" onClick={sendData}>저장</Button>
-          <FormLabel htmlFor="email-alerts" mb="0">
+          <FormLabel htmlFor="email-alerts" mb="0" mt="13px" fontSize="14px">
             미리보기 모드
           </FormLabel>
           <Switch
+            mt="8px"
             size="lg"
             id="email-alerts"
             onChange={(e) => {
               setReadOnly();
             }}
           />
+          <Button colorScheme="green" onClick={sendData} mr="30px">저장</Button>
         </Flex>
       </ControlContainer>
 
@@ -179,6 +189,7 @@ const ContentEditor = () => {
             <Button colorScheme="green" onClick={sendData}>저장</Button>
           </ToolbarFlex>
       </Toolbar>
+      <ToastContainer/>
     </>
   );
 };
