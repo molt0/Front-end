@@ -24,6 +24,7 @@ const SpecificPage = () => {
     <div>
       <ContentContainer>
         <SHeader />
+        
         <HeadInfo />
         <ButtonMenus />
 

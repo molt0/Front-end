@@ -134,6 +134,12 @@ const DocName = styled.div`
   margin-left: 20px;
 `
 
+const ModalFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  `;
+
 const ContentEditor = () => {
   const [content, setContent] = useState([]);
   const instanceRef = useRef(null);
@@ -183,14 +189,18 @@ const ContentEditor = () => {
           <ModalHeader>정보 수정</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            모달 테스트
+            <ModalFlex>
+            <Button >곡 소개</Button>
+            <Button mt="5px">가사</Button>
+            <Button mt="5px">정보</Button>
+            <Button mt="5px">기타</Button>  
+            </ModalFlex>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+              닫기
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
