@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage'
 import SearchPage from './pages/SearchPage'
 import UserPage from './pages/UserPage'
 import SignUpPage from './pages/SignUpPage'
+import NotFoundPage from './pages/404';
 import ContentEditor from './pages/SpecificPage/ContentEditor'
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ChakraProvider } from "@chakra-ui/react"
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
+        <Route exact path="/404" component={NotFoundPage} />
       </BrowserRouter>
       <ToastContainer />
     </ChakraProvider>
