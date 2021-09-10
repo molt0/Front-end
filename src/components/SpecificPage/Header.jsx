@@ -18,6 +18,7 @@ const SHeader = () => {
   return(
     <div>
         <Position>
+          <Button size="md" mt="10px" ml="15px">❮</Button>
           <Button leftIcon={<PlusSquareIcon />} w="90px" colorScheme="teal" size="sm" float="right" mt="10px">
             수정하기
           </Button>
