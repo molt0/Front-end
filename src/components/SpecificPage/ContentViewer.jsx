@@ -8,7 +8,7 @@ import { Button } from "@chakra-ui/react";
 
 import { FakeData } from "../../fake-data/EditorData"
 
-const ContentViewer = () => {
+const ContentViewer = (title) => {
   // const [content, setContent] = useState([]);
   
   // setContent(data)
