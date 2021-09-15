@@ -10,15 +10,18 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import Album from "./Album"
+import Renewal from './Renewal'
 
-const albums = () =>{
+const AlbumList = () =>{
   // 가로 세로모드 
   const [isVertHoriz, setIsVertHoriz] = useState("horizontal")
-  function VH_more(e){
-    if(isVertHoriz ==  "horizontal")
-      setIsVertHoriz("vertical")
-    else
-      setIsVertHoriz("horizontal")
+  function VH_more(){
+    if(isVertHoriz ==  "horizontal"){ 
+      setIsVertHoriz("vertical") 
+    } 
+    else{ 
+      setIsVertHoriz("horizontal") 
+    }
   }
 
   // 긁어온 음원 목록 (원본)
@@ -41,51 +44,18 @@ const albums = () =>{
     {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목16", time:200, like:32, date: new Date("2021-09-01"), type:"락"}
   ])
 
-  // 정렬을 거칠 음원 목록
-  const [albums, setAlbums] = useState(moltoList)
-
-  // 새로고침 임시방편
-  const [re, setRenewal] = useState(moltoList.map((album, index) => ( <Album album={album} isVertHoriz={isVertHoriz} key={index} /> )))
-  function renewal(li){
-    setRenewal(li.map((album, index) => (
-      <Album album={album} isVertHoriz={isVertHoriz} key={index} />
-    )))
-  }
-
   // 순서 정렬
-  // albums 정렬을 바꾼후 다시 flter를 돌려 map를 씀
-  function contentSolt(sun){
-    switch (sun){
-      case "인기순":
-        setRenewal(albums.sort((a, b) => { 
-          return b.like - a.like 
-        }))
-        break
-      case "최신순":
-        setRenewal(albums.sort((a, b) => {
-          return b.date.getTime() - a.date.getTime() 
-        }))
-        break
-    }
-    
-    strainer(gangr)
-  }
+  const [isContentSolt, setIsContentSolt] = useState("")
 
+  // 장르 필터
   const [gangr, setGangr] = useState("")
-  function strainer(value){
-    if(value != "")
-      renewal(albums.filter((element)=>{ 
-        if(element.type == value) return true
-      }))
-    else
-      renewal(albums)
-  }
+
 
   return(
     <Box >
       <Flex h={50} lineHeight="50px" bgColor="#70ebe0">
         <Box flex="8" ml={5}>
-          <Select w={200} placeholder="모든 장르" onChange={(e)=>{setGangr(e.target.value); strainer(e.target.value); }}>
+          <Select w={200} placeholder="모든 장르" onChange={(e)=>{setGangr(e.target.value) }}>
             <option value="발라드">발라드</option>
             <option value="팝">팝</option>
             <option value="락">락</option>
@@ -94,7 +64,7 @@ const albums = () =>{
         </Box>
 
         <Flex flex="2" justifyContent="space-around">
-          <RadioGroup w="200px" onChange={(value)=>{contentSolt(value)}}>
+          <RadioGroup w="200px" onChange={(value)=>{setIsContentSolt(value)}}>
             <Stack direction="row">
               <Radio value="최신순" >최신순</Radio>
               <Radio value="인기순" >인기순</Radio>
@@ -107,10 +77,10 @@ const albums = () =>{
       </Flex>
 
       <SimpleGrid w="1000px" m="0 auto " p="10px" spacing="20px" columns={isVertHoriz == "horizontal" ? "5" : "1"}> 
-        {re}
+        <Renewal albums={moltoList} isVertHoriz={isVertHoriz} isContentSolt={isContentSolt} gangr={gangr}/>
       </SimpleGrid>
     </Box>
   )
 }
 
-export default albums
+export default AlbumList
