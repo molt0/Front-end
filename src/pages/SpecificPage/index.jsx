@@ -5,6 +5,8 @@ import HeadInfo from "../../components/SpecificPage/HeadInfo";
 import ButtonMenus from "../../components/SpecificPage/ButtonMenus";
 import ContentViewer from "../../components/SpecificPage/ContentViewer";
 
+import Background from "../../components/global/Background";
+
 import { Divider, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
 const ContentContainer = styled.div`
@@ -22,6 +24,7 @@ const ContentContainer = styled.div`
 const SpecificPage = () => {
   return (
     <div>
+      
       <ContentContainer>
         <SHeader />
         
@@ -31,7 +34,9 @@ const SpecificPage = () => {
         <ContentViewer/>
 
         <Divider mt="30px" colorScheme="whiteAlpha" />
+        
       </ContentContainer>
+
     </div>
   );
 };
