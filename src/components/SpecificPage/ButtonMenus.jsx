@@ -19,7 +19,7 @@ const Header = () => {
           기타
         </Button>
         <Button w="200px" colorScheme="teal" size="md" variant="outline"  ml="10px">
-          비디오
+          관련 미디어
         </Button>
       </Flex>
     </div>
