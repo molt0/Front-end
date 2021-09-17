@@ -2,6 +2,7 @@ const FakeData = {
   document_info: {
     title: "문서 제목(노래 제목)",
     artist: "아티스트 이름",
+    date: "2021-01-01"
   },
 
   document_content: {
