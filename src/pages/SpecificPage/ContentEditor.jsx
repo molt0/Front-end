@@ -226,7 +226,7 @@ const ContentEditor = () => {
 
       <ControlContainer>
         <Flex>
-          <Button size="md">❮</Button>
+          <Button size="md" onClick={()=>history.back()}>❮</Button>
         </Flex>
 
         <InfoBtn onClick={onOpen}>
