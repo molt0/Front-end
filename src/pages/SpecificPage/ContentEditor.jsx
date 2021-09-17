@@ -7,7 +7,7 @@ import { FakeData } from "../../fake-data/EditorData";
 
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, Switch, FormLabel, Heading } from "@chakra-ui/react";
+import { Flex, Button, Switch, FormLabel, Heading, InputGroup, InputLeftAddon, Input, Divider } from "@chakra-ui/react";
 
 import {
   Modal,
@@ -20,9 +20,9 @@ import {
   useDisclosure
 } from "@chakra-ui/react"
 
-const Flex = styled.div`
-  display: flex;
-`;
+// const Flex = styled.div`
+//   display: flex;
+// `;
 
 const ControlContainer = styled.div`
   width: 100%;
@@ -140,6 +140,10 @@ const ModalFlex = styled.div`
   justify-content: space-around;
   `;
 
+const ModalBtnFlex = styled.div`
+  display: flex;
+`;
+
 const ContentEditor = () => {
   const [content, setContent] = useState([]);
   const instanceRef = useRef(null);
@@ -190,7 +194,22 @@ const ContentEditor = () => {
           <ModalCloseButton />
           <ModalBody>
             <ModalFlex>
-            <Button >곡 소개</Button>
+            <InputGroup>
+              <InputLeftAddon children="곡 제목" />
+              <Input type="tel" placeholder="제목을 입력하세요" value={FakeData.document_info.title} />
+            </InputGroup>
+            <InputGroup mt="10px">
+              <InputLeftAddon children="아티스트" />
+              <Input type="tel" placeholder="제목을 입력하세요" value={FakeData.document_info.artist} />
+            </InputGroup>
+            <Flex>
+              <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="230px">저장</Button>
+              <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="5px" variant="outline">초기화</Button>
+            </Flex>
+
+            <Divider mt="20px" />
+          
+            <Button mt="20px">곡 소개</Button>
             <Button mt="5px">가사</Button>
             <Button mt="5px">정보</Button>
             <Button mt="5px">기타</Button>  
@@ -207,7 +226,7 @@ const ContentEditor = () => {
 
       <ControlContainer>
         <Flex>
-          <Button size="md">❮</Button>
+          <Button size="md" onClick={()=>history.back()}>❮</Button>
         </Flex>
 
         <InfoBtn onClick={onOpen}>
