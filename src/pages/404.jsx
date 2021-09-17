@@ -11,11 +11,17 @@ const Background = styled.div`
     background-color: #91e9c4;
 `;
 const MainTitle = styled.p`
+    font-family: 'Quicksand', sans-serif;
+    color: #899e6e;
     font-size: 70px;
 `;
 
+const SubTitle = styled.p`
+    font-size: 30px;
+`;
+
 const Center = styled.div`
-    width: 1200px;
+    width: 800px;
     margin: 0 auto;
 `
 
@@ -25,6 +31,7 @@ const NotFoundPage = () =>{
             <Background>
                 <Center>
                     <MainTitle>404 NOT FOUND!</MainTitle>
+                    <SubTitle>요청하신 정보를 찾을 수 없어요</SubTitle>
                     <Link href="./">
                         <Button>홈페이지로 돌아가기</Button>
                     </Link>
