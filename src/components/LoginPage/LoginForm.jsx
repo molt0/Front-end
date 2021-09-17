@@ -6,8 +6,13 @@ import {
   Input,
   Button,
   Box,
+  Text,
+  Link,
+  Image,
+  Center,
+  Icon
 } from "@chakra-ui/react";
-
+import { TriangleUpIcon } from '@chakra-ui/icons'
 
 
 const PsInput = () => {
@@ -16,6 +21,17 @@ const PsInput = () => {
 
   return(
     <Box>
+      <Center>
+        <Image
+        boxSize="200px"
+        objectFit="cover"
+        src="https://bit.ly/sage-adebayo"
+        alt="Segun Adebayo"
+        />
+      </Center>
+      <Box>
+        <Input width="300px" height="50px" left="100px" top="50px" placeholder="아이디" />
+      </Box>
       <InputGroup width="300px" height="50px" left="100px" top="80px">
         <Input
           pr="4.5rem"
@@ -29,8 +45,15 @@ const PsInput = () => {
           </Button>
         </InputRightElement>
       </InputGroup>
+      <Box>
+        <Text fontSize="md" ml="110px" mt="65px">이곳이 처음이라면 <Link color="blue">여기</Link>를 눌러주세요.</Text>
+      </Box>
+      <Button variant="outline" width="200px" height="50px" left="150px" top="30px" borderRadius="lg" bg="teal.300" color="#fff" fontSize="xl" fontWeight="extrabold">
+            로그인
+      </Button>
     </Box>
   );
 }
+
 
 export default PsInput;
