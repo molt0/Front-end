@@ -32,7 +32,7 @@ const NotFoundPage = () =>{
                 <Center>
                     <MainTitle>404 NOT FOUND!</MainTitle>
                     <SubTitle>요청하신 정보를 찾을 수 없어요</SubTitle>
-                    <Link href="./">
+                    <Link href="../">
                         <Button>홈페이지로 돌아가기</Button>
                     </Link>
                     <Button ml="10px" colorScheme="yellow" onClick={()=>history.back()}>이전 페이지로 돌아가기</Button>
