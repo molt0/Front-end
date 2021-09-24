@@ -19,11 +19,10 @@ ReactDOM.render(
         <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/specific/editor/:title_artist/:type" component={ContentEditor} />
-        
-        <Route path="/specific/:title_artist/intro" component={SpecificPage} />
-        <Redirect from="/specific/editor/:title_artist" to="/specific/editor/:title_artist/intro" />
+        <Route path="/specific/editor/:title_artist" component={ContentEditor} />
+        {/* <Redirect from="/specific/editor/:title_artist" to="/specific/editor/:title_artist/intro" /> */}
 
+        <Route path="/specific/:title_artist" component={SpecificPage} />
         <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
