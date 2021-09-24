@@ -152,6 +152,25 @@ const ContentEditor = () => {
   //Modal
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  //카테고리 선택 toggle
+  const [toggles, setToggles] = useState([
+    { isToggle: true, text: "곡 소개" },
+    { isToggle: false, text: "가사" },
+    { isToggle: false, text: "정보" },
+    { isToggle: false, text: "기타" },
+    { isToggle: false, text: "관련 미디어" },
+  ]);
+
+  const categoryClick = (index) =>{
+    setToggles(()=>
+      toggles.map((y, mapIndex)=>
+        mapIndex === index
+          ? { isToggle: true, text: y.text}
+          : { isToggle: false, text: y.text}
+          )
+      );
+  }
+
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -208,11 +227,13 @@ const ContentEditor = () => {
             </Flex>
 
             <Divider mt="20px" />
-          
-            <Button mt="20px">곡 소개</Button>
-            <Button mt="5px">가사</Button>
-            <Button mt="5px">정보</Button>
-            <Button mt="5px">기타</Button>  
+            {toggles.map((toggle, i) =>
+              toggle.isToggle 
+              ? (<Button mt="5px" colorScheme="teal" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+              : (<Button mt="5px" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+            )}
+            
+        
             </ModalFlex>
           </ModalBody>
 
