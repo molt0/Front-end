@@ -23,6 +23,8 @@ ReactDOM.render(
         {/* <Redirect from="/specific/editor/:title_artist" to="/specific/editor/:title_artist/intro" /> */}
 
         <Route path="/specific/:title_artist" component={SpecificPage} />
+        <Redirect from="/specific/:title_artist" to="/specific/:title_artist/intro" />
+
         <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
