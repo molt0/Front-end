@@ -13,7 +13,7 @@ import {
   margin-right: 20px;
  `
 
-const SHeader = () => {
+const PageHeader = () => {
   return(
     <div>
         <Position>
@@ -27,4 +27,4 @@ const SHeader = () => {
   );
 }
 
-export default SHeader;
+export default PageHeader;
