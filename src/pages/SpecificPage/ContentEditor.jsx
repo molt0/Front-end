@@ -179,7 +179,7 @@ const ContentEditor = () => {
   
   useEffect(()=>{
       window.addEventListener('scroll', updateScroll);
-      setVisible(scrollPosition > 80 ? true : false)
+      setVisible(scrollPosition > 80)
       console.log(footerVisible)
   });
 
