@@ -8,7 +8,7 @@ import UserPage from './pages/UserPage'
 import SignUpPage from './pages/SignUpPage'
 import NotFoundPage from './pages/404';
 import ContentEditor from './pages/SpecificPage/ContentEditor'
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ChakraProvider } from "@chakra-ui/react"
 import { ToastContainer } from "react-toastify"
 
@@ -16,14 +16,17 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter basename="/4">
+        <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/editor" component={ContentEditor} />
-        <Route path="/specific" component={SpecificPage} />
+        <Route path="/specific/:title" component={SpecificPage} />
         <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
-        <Route exact path="/404" component={NotFoundPage} />
+        
+        <Route component={NotFoundPage} />
+        </Switch>
       </BrowserRouter>
       <ToastContainer />
     </ChakraProvider>
