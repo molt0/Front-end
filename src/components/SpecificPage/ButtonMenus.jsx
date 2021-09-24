@@ -13,8 +13,8 @@ const Header = () => {
   //i is for index
   const onClick = (index) => {
     setToggles((prevState) =>
-      toggles.map((x, mIndex) =>
-        mIndex === index
+      toggles.map((x, mapIndex) =>
+        mapIndex === index
           ? { isToggle: true, text: x.text }
           : { isToggle: false, text: x.text }
       )
