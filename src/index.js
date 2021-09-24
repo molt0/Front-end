@@ -19,8 +19,8 @@ ReactDOM.render(
         <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/editor" component={ContentEditor} />
-        <Route path="/specific/:title" component={SpecificPage} />
+        <Route path="specific/editor/:title_artist/:type" component={ContentEditor} />
+        <Route path="/specific/:title_artist/:type" component={SpecificPage} />
         <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
