@@ -8,7 +8,7 @@ import UserPage from './pages/UserPage'
 import SignUpPage from './pages/SignUpPage'
 import NotFoundPage from './pages/404';
 import ContentEditor from './pages/SpecificPage/ContentEditor'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { ChakraProvider } from "@chakra-ui/react"
 import { ToastContainer } from "react-toastify"
 
@@ -20,7 +20,10 @@ ReactDOM.render(
         <Route exact path="/" component={MainPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/specific/editor/:title_artist/:type" component={ContentEditor} />
-        <Route path="/specific/:title_artist/:type" component={SpecificPage} />
+        
+        <Route path="/specific/:title_artist/intro" component={SpecificPage} />
+        <Redirect from="/specific/editor/:title_artist" to="/specific/editor/:title_artist/intro" />
+
         <Route path="/search" component={SearchPage} />
         <Route exact path="/user" component={UserPage} />
         <Route exact path="/signup" component={SignUpPage} />
