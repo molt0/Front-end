@@ -229,7 +229,7 @@ const ContentEditor = () => {
             <Divider mt="20px" />
             {toggles.map((toggle, i) =>
               toggle.isToggle 
-              ? (<Button mt="5px" colorScheme="teal" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+              ? (<Button mt="5px" colorScheme="green" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
               : (<Button mt="5px" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
             )}
             
