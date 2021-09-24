@@ -35,6 +35,7 @@ const NotFoundPage = () =>{
                     <Link href="./">
                         <Button>홈페이지로 돌아가기</Button>
                     </Link>
+                    <Button ml="10px" colorScheme="yellow" onClick={()=>history.back()}>이전 페이지로 돌아가기</Button>
                 </Center>
             </Background>
         </>
