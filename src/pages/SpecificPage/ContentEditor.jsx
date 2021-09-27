@@ -146,6 +146,7 @@ const ModalBtnFlex = styled.div`
 
 const ContentEditor = () => {
   const [content, setContent] = useState([]);
+  const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
@@ -184,6 +185,16 @@ const ContentEditor = () => {
   });
 
   async function sendData() {
+    if(readOnlyBoolean === true){
+      toast.error(<div>저장 실패! <br />보기모드를 해제해주세요</div>,
+      {position: "bottom-left"},
+      {autoClose: 1500},
+      {theme: "colored"}
+    );
+    return
+    }
+      
+      
     const savedContent = await instanceRef.current.save();
 
     console.log("savedConent");
@@ -198,6 +209,9 @@ const ContentEditor = () => {
 
   const setReadOnly = () => {
     instanceRef.current.readOnly.toggle();
+    readOnlyBoolean === true ? 
+    ReadOnlyStatus(false) : ReadOnlyStatus(true)
+      
   };
 
   const openModal = () =>{
