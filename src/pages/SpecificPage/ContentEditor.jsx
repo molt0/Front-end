@@ -144,7 +144,9 @@ const ModalBtnFlex = styled.div`
   display: flex;
 `;
 
-const ContentEditor = () => {
+const ContentEditor = ({match}) => {
+  const { title_artist } = match.params
+
   const [content, setContent] = useState([]);
   const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
@@ -177,12 +179,19 @@ const ContentEditor = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
 }
 
-  
+// get Scorll Behaviour  
   useEffect(()=>{
       window.addEventListener('scroll', updateScroll);
       setVisible(scrollPosition > 80)
       console.log(footerVisible)
-  });
+
+  },);
+
+// get information from server
+useEffect(()=>{
+  console.log("page mounted")
+  console.log(`URL Param Detected: ${title_artist}`)
+}, []);
 
   async function sendData() {
     if(readOnlyBoolean === true){
