@@ -3,7 +3,13 @@ import styled from "styled-components";
 import PageHeader from "../../components/SpecificPage/Header";
 import HeadInfo from "../../components/SpecificPage/HeadInfo";
 import ButtonMenus from "../../components/SpecificPage/ButtonMenus";
-import ContentViewer from "../../components/SpecificPage/ContentViewer";
+
+import Api from "../../Api"
+
+import EditorJs from "react-editor-js";
+import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
+
+import { FakeData } from "../../fake-data/EditorData"
 
 import Header from "../../components/global/Header"
 
@@ -36,8 +42,10 @@ const HideWhenScroll = styled.div`
   transition: all 0.3s ease-in-out;
 `;
 
-const SpecificPage = () => {
+const SpecificPage = ({match}) => {
+  const { title_artist } = match.params
 
+  const [isURLFailed, setURLFailed] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
 
@@ -51,6 +59,37 @@ const SpecificPage = () => {
     console.log(footerVisible)
   });
 
+
+  useEffect(()=>{
+    console.log("page mounted")
+    console.log(`URL Param Detected: ${title_artist}, intro`)
+  
+      const URLdivided = title_artist.split(':')
+      const title = URLdivided[0]
+      const artist = URLdivided[1]
+      const type = 'intro'
+     
+      if(title_artist === undefined || 
+                title === undefined ||
+               artist === undefined){
+          setURLFailed(true)
+        }
+      else{
+          setURLFailed(false)
+      }
+      
+      console.log(title)
+      console.log(artist)
+      console.log(type)
+
+
+      Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
+        console.log(res.data)
+      })
+     
+  
+  }, []);
+
   return (
     <div>
       <HideWhenScroll visibilty={footerVisible}>
@@ -59,13 +98,14 @@ const SpecificPage = () => {
       <Spacer />
       <ContentContainer>
         <PageHeader />
-
-        
+ 
         <HeadInfo />
         <ButtonMenus />
-
-        <ContentViewer/>
-
+        <EditorJs 
+        data={FakeData.document_content}
+        tools={EDITOR_JS_TOOLS}
+        readOnly
+      />
         <Divider mt="30px" colorScheme="whiteAlpha" />
         
       </ContentContainer>
