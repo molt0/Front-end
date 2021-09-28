@@ -46,6 +46,9 @@ const SpecificPage = ({match}) => {
   const { title_artist } = match.params
 
   const [isURLFailed, setURLFailed] = useState(false);
+  const [docsExist, setDocsExist] = useState(false);
+
+  const [content, setContent] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
 
@@ -84,7 +87,12 @@ const SpecificPage = ({match}) => {
 
 
       Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
-        console.log(res.data)
+        if(res.data.content === false){
+          setDocsExist(false)
+        }else{
+          setDocsExist(true)
+          setContent(res.data.content)
+        }
       })
      
   
@@ -102,7 +110,7 @@ const SpecificPage = ({match}) => {
         <HeadInfo />
         <ButtonMenus />
         <EditorJs 
-        data={FakeData.document_content}
+        data={content}
         tools={EDITOR_JS_TOOLS}
         readOnly
       />
