@@ -210,11 +210,11 @@ const ContentEditor = ({match}) => {
 
   //카테고리 선택 toggle
   const [toggles, setToggles] = useState([
-    { isToggle: true, text: "곡 소개" },
-    { isToggle: false, text: "가사" },
-    { isToggle: false, text: "정보" },
-    { isToggle: false, text: "기타" },
-    { isToggle: false, text: "관련 미디어" },
+    { isToggle: true, text: "곡 소개", type: 'intro' },
+    { isToggle: false, text: "가사", type: 'lyrics'},
+    { isToggle: false, text: "정보", type: 'info' },
+    { isToggle: false, text: "기타", type: 'etc' },
+    { isToggle: false, text: "관련 미디어", type: 'relate' },
   ]);
 
   const categoryClick = (index) =>{
@@ -225,6 +225,8 @@ const ContentEditor = ({match}) => {
           : { isToggle: false, text: y.text}
           )
       );
+
+      //api get 으로 toogle의 type으로 가져오기
   }
 
 
@@ -264,7 +266,7 @@ useEffect(()=>{
     console.log(type)
 
     Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
-      console.log(res.data)
+      console.log(res.data.content)
     })
 
 }, []);
@@ -279,7 +281,6 @@ useEffect(()=>{
     return
     }
       
-      
     const savedContent = await instanceRef.current.save();
 
     console.log("savedConent");
@@ -290,18 +291,16 @@ useEffect(()=>{
       {autoClose: 1500},
       {theme: "colored"}
     );
+
+    // Api.post()
   }
 
   const setReadOnly = () => {
     instanceRef.current.readOnly.toggle();
     readOnlyBoolean === true ? 
-    ReadOnlyStatus(false) : ReadOnlyStatus(true)
-      
+    ReadOnlyStatus(false) : ReadOnlyStatus(true)   
   };
 
-  const openModal = () =>{
-
-  }
 
   return (
     <>
@@ -388,7 +387,7 @@ useEffect(()=>{
 
       <EditorContainer>
         <EditorJs
-          data={FakeData.document_content}
+          data={content}
           onChange={(e) => {
             // setContent(content);
           }}
