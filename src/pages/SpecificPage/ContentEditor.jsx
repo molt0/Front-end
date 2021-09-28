@@ -9,6 +9,8 @@ import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { Flex, Button, Switch, FormLabel, Heading, InputGroup, InputLeftAddon, Input, Divider, Link } from "@chakra-ui/react";
 
+import Api from '../../Api'
+
 import {
   Modal,
   ModalOverlay,
@@ -198,7 +200,7 @@ const ContentEditor = ({match}) => {
   const { title_artist } = match.params
 
   const [content, setContent] = useState([]);
-  const [isDataFailed, setDataFailed] = useState(false);
+  const [isURLFailed, setURLFailed] = useState(false);
   const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -241,29 +243,30 @@ const ContentEditor = ({match}) => {
 // get information from server
 useEffect(()=>{
   console.log("page mounted")
-  console.log(`URL Param Detected: ${title_artist}`)
+  console.log(`URL Param Detected: ${title_artist}, intro`)
 
     const URLdivided = title_artist.split(':')
     const title = URLdivided[0]
     const artist = URLdivided[1]
+    const type = 'intro'
    
-
     if(title_artist === undefined || 
               title === undefined ||
              artist === undefined){
-        setDataFailed(true)
-
+        setURLFailed(true)
       }
     else{
-        setDataFailed(false)
+        setURLFailed(false)
     }
     
-
     console.log(title)
     console.log(artist)
+    console.log(type)
 
-  
-  
+    Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
+      console.log(res.data)
+    })
+
 }, []);
 
   async function sendData() {
@@ -302,7 +305,7 @@ useEffect(()=>{
 
   return (
     <>
-      <IfDataLoadFailed failed={isDataFailed}>
+      <IfDataLoadFailed failed={isURLFailed}>
         <FailedBox>
           <FailedTitle>정보 불러오기를 실패했습니다 :(</FailedTitle>
           <FailedMsg> URL 정보가 올바르지 않거나, 예상치 못한 오류가 발생했습니다!</FailedMsg>
@@ -339,8 +342,8 @@ useEffect(()=>{
             <Divider mt="20px" />
             {toggles.map((toggle, i) =>
               toggle.isToggle 
-              ? (<Button mt="5px" colorScheme="blue" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
-              : (<Button mt="5px" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+              ? (<Button key={i} mt="5px" colorScheme="blue" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+              : (<Button key={i} mt="5px" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
             )}
             
         
@@ -385,7 +388,7 @@ useEffect(()=>{
 
       <EditorContainer>
         <EditorJs
-          data={content}
+          data={FakeData.document_content}
           onChange={(e) => {
             // setContent(content);
           }}
