@@ -1,6 +1,6 @@
 import { 
   Box, 
-  Button, 
+  Button, Switch,
   Flex, 
   Radio, 
   RadioGroup,
@@ -65,7 +65,7 @@ const SearchPage = () =>{
   return (
     <Box >
       <Flex h={50} lineHeight="50px" bgColor="#70ebe0">
-        <Box flex="8" ml={5}>
+        <Box flex="2" ml={5}>
           <Select w={200} placeholder="모든 장르" onChange={(e)=>{setGangr(e.target.value) }}>
             <option value="발라드">발라드</option>
             <option value="팝">팝</option>
@@ -74,16 +74,17 @@ const SearchPage = () =>{
           </Select>
         </Box>
 
-        <Flex flex="2" justifyContent="space-around">
+        <Flex flex="1" justifyContent="space-around">
           <RadioGroup w="300px" onChange={(value)=>{setIsContentSolt(value)}}>
             <Stack direction="row">
               <Radio value="최신" >최신순</Radio>
               <Radio value="인기" >인기순</Radio>
             </Stack>
           </RadioGroup>
-          <Button w={50} h={50} border="1px solid black" borderRadius="5px" onClick={VH_more}>
-            {isVertHoriz == "horizontal" ? "↔" : "↕"}
-          </Button>
+          <Stack direction="row">
+            <Box>세로</Box>
+            <Switch w={50} h={50} lineHeight="60px" size="lg" onChange={VH_more}/>
+          </Stack>
         </Flex>
       </Flex>
 
