@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -8,10 +8,8 @@ import { Button } from "@chakra-ui/react";
 
 import { FakeData } from "../../fake-data/EditorData"
 
-const ContentViewer = (title) => {
+const ContentViewer = () => {
   // const [content, setContent] = useState([]);
-  
-  // setContent(data)
 
   return (
     <>

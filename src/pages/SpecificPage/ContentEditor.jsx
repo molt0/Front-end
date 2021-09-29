@@ -7,7 +7,9 @@ import { FakeData } from "../../fake-data/EditorData";
 
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { Flex, Button, Switch, FormLabel, Heading, InputGroup, InputLeftAddon, Input, Divider } from "@chakra-ui/react";
+import { Flex, Button, Switch, FormLabel, Heading, InputGroup, InputLeftAddon, Input, Divider, Link } from "@chakra-ui/react";
+
+import Api from '../../Api'
 
 import {
   Modal,
@@ -144,8 +146,62 @@ const ModalBtnFlex = styled.div`
   display: flex;
 `;
 
-const ContentEditor = () => {
+const IfDataLoadFailed = styled.div`
+  display: ${props => props.failed ? 'block' : 'none'};
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+
+  & Button{
+    margin-top: 15px;
+    width: 350px;
+
+    left: 15%;
+  }
+  
+  
+`;
+
+const FailedBox = styled.div`
+  font-family: 'Quicksand', sans-serif !important;
+  position: absolute;
+
+  width: 500px;
+  height: 350px;
+
+  left: 50%;
+  transform: translate(-50%, 50%);
+
+  border-radius: 10px;
+
+  background-color: #fff;
+`
+const FailedTitle = styled.p`
+    text-align: center;
+
+    margin-top: 30px;
+
+    color: #899e6e;
+    font-size: 30px;
+`
+
+const FailedMsg = styled.p`
+  text-align: center;
+
+  margin-top: 10px;
+
+  color: #899e6e;
+`
+
+const ContentEditor = ({match}) => {
+  const { title_artist } = match.params
+
   const [content, setContent] = useState([]);
+  const [isURLFailed, setURLFailed] = useState(false);
+  const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
@@ -154,11 +210,11 @@ const ContentEditor = () => {
 
   //카테고리 선택 toggle
   const [toggles, setToggles] = useState([
-    { isToggle: true, text: "곡 소개" },
-    { isToggle: false, text: "가사" },
-    { isToggle: false, text: "정보" },
-    { isToggle: false, text: "기타" },
-    { isToggle: false, text: "관련 미디어" },
+    { isToggle: true, text: "곡 소개", type: 'intro' },
+    { isToggle: false, text: "가사", type: 'lyrics'},
+    { isToggle: false, text: "정보", type: 'info' },
+    { isToggle: false, text: "기타", type: 'etc' },
+    { isToggle: false, text: "관련 미디어", type: 'relate' },
   ]);
 
   const categoryClick = (index) =>{
@@ -169,6 +225,8 @@ const ContentEditor = () => {
           : { isToggle: false, text: y.text}
           )
       );
+
+      //api get 으로 toogle의 type으로 가져오기
   }
 
 
@@ -176,14 +234,53 @@ const ContentEditor = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
 }
 
-  
+// get Scorll Behaviour  
   useEffect(()=>{
       window.addEventListener('scroll', updateScroll);
       setVisible(scrollPosition > 80)
       console.log(footerVisible)
-  });
+
+  },);
+
+// get information from server
+useEffect(()=>{
+  console.log("page mounted")
+  console.log(`URL Param Detected: ${title_artist}, intro`)
+
+    const URLdivided = title_artist.split(':')
+    const title = URLdivided[0]
+    const artist = URLdivided[1]
+    const type = 'intro'
+   
+    if(title_artist === undefined || 
+              title === undefined ||
+             artist === undefined){
+        setURLFailed(true)
+      }
+    else{
+        setURLFailed(false)
+    }
+    
+    console.log(title)
+    console.log(artist)
+    console.log(type)
+
+    Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
+      console.log(res.data.content)
+    })
+
+}, []);
 
   async function sendData() {
+    if(readOnlyBoolean === true){
+      toast.error(<div>저장 실패! <br />보기모드를 해제해주세요</div>,
+      {position: "bottom-left"},
+      {autoClose: 1500},
+      {theme: "colored"}
+    );
+    return
+    }
+      
     const savedContent = await instanceRef.current.save();
 
     console.log("savedConent");
@@ -194,18 +291,33 @@ const ContentEditor = () => {
       {autoClose: 1500},
       {theme: "colored"}
     );
+
+    // Api.post()
   }
 
   const setReadOnly = () => {
     instanceRef.current.readOnly.toggle();
+    readOnlyBoolean === true ? 
+    ReadOnlyStatus(false) : ReadOnlyStatus(true)   
   };
 
-  const openModal = () =>{
-
-  }
 
   return (
     <>
+      <IfDataLoadFailed failed={isURLFailed}>
+        <FailedBox>
+          <FailedTitle>정보 불러오기를 실패했습니다 :(</FailedTitle>
+          <FailedMsg> URL 정보가 올바르지 않거나, 예상치 못한 오류가 발생했습니다!</FailedMsg>
+          <FailedMsg>
+            다음 항목을 확인해주세요: <br /> <br />
+            - URL의 형태는 '제목:아티스트' 형태여야 합니다. <br />
+            - 잘못된 요청을 하지 않았는지 확인해주세요
+          </FailedMsg>
+          <Button colorScheme="blue" onClick={()=>history.back()}>이전 페이지로 이동하기</Button>
+          <Link href="/"> <Button>홈페이지로 돌아가기</Button></Link>
+        </FailedBox>
+      </IfDataLoadFailed>
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -229,8 +341,8 @@ const ContentEditor = () => {
             <Divider mt="20px" />
             {toggles.map((toggle, i) =>
               toggle.isToggle 
-              ? (<Button mt="5px" colorScheme="blue" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
-              : (<Button mt="5px" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+              ? (<Button key={i} mt="5px" colorScheme="blue" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
+              : (<Button key={i} mt="5px" onClick={()=> categoryClick(i)}>{toggle.text}</Button>)
             )}
             
         
@@ -275,7 +387,7 @@ const ContentEditor = () => {
 
       <EditorContainer>
         <EditorJs
-          data={FakeData.document_content}
+          data={content}
           onChange={(e) => {
             // setContent(content);
           }}
