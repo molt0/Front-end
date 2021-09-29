@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,  useCallback} from "react";
 import styled, { css } from "styled-components";
 
 import EditorJs from "react-editor-js";
@@ -42,9 +42,6 @@ const ControlContainer = styled.div`
     margin-left: 20px;
     float: right;
   }
-
-
-  
 `;
 
 const InfoBtn = styled.div`
@@ -197,9 +194,10 @@ const FailedMsg = styled.p`
 `
 
 const ContentEditor = ({match}) => {
-  const { title_artist } = match.params
+  
 
   const [content, setContent] = useState([]);
+  const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
   const [isURLFailed, setURLFailed] = useState(false);
   const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
@@ -225,10 +223,39 @@ const ContentEditor = ({match}) => {
           : { isToggle: false, text: y.text}
           )
       );
-
-      //api get 으로 toogle의 type으로 가져오기
+      //axios events
+      fetchApi(index)
   }
 
+  const fetchApi = useCallback((index)=>{
+    {
+      const { title_artist } = match.params
+      console.log("page mounted")
+      console.log(`URL Param Detected: ${title_artist}, intro`)
+    
+      const URLdivided = title_artist.split(':')
+      console.log(URLdivided)
+
+      if(
+        URLdivided[0] === undefined ||
+        URLdivided[1] === undefined){
+         setURLFailed(true)
+       }
+     else{
+         setURLFailed(false)
+         setParams({...params, title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
+     }
+      
+      //파라미터 설정
+      
+      console.log(params.type)
+      //api get 으로 toogle의 type으로 가져오기
+      Api.get(`specific/${params.title}/${params.artist}/${ params.type == 'intro' ? toggles[0].type : toggles[index].type}`).then((response)=>{
+        console.log(response)
+      })
+    }
+  
+  })
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -243,31 +270,12 @@ const ContentEditor = ({match}) => {
   },);
 
 // get information from server
-useEffect(()=>{
-  console.log("page mounted")
-  console.log(`URL Param Detected: ${title_artist}, intro`)
+useEffect(async ()=>{
+  fetchApi()
 
-    const URLdivided = title_artist.split(':')
-    const title = URLdivided[0]
-    const artist = URLdivided[1]
-    const type = 'intro'
-   
-    if(title_artist === undefined || 
-              title === undefined ||
-             artist === undefined){
-        setURLFailed(true)
-      }
-    else{
-        setURLFailed(false)
-    }
     
-    console.log(title)
-    console.log(artist)
-    console.log(type)
-
-    Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
-      console.log(res.data.content)
-    })
+    
+      
 
 }, []);
 
