@@ -22,8 +22,7 @@ const Rank_Top100 = () => {
 
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
-
-  var rank = 10;  
+  
   useEffect(() =>  {
       request(url, function(error, response, html){
         if (!error) {
@@ -89,7 +88,7 @@ const Rank_Top100 = () => {
               </SimpleGrid>
             </Collapse>
             <Button size="sm" onClick={handleToggle} mt="1rem">
-                  Show {show ? "Less" : "More"}
+                  {show ? "닫기" : "더보기"}
                 </Button>
           </Box>
         </Box>

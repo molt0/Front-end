@@ -23,7 +23,6 @@ const Rank_Week = () => {
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
 
-  var rank = 10;  
   useEffect(() =>  {
       request(url, function(error, response, html){
         if (!error) {
@@ -89,8 +88,8 @@ const Rank_Week = () => {
               </SimpleGrid>
             </Collapse>
             <Button size="sm" onClick={handleToggle} mt="1rem">
-                  Show {show ? "Less" : "More"}
-                </Button>
+              {show ? "닫기" : "더보기"}
+            </Button>
           </Box>
         </Box>
         

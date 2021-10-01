@@ -24,10 +24,9 @@ const Rank_Day = () => {
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
 
-  var rank = 0;  
   useEffect(() =>  {
       request(url, function(error, response, html){
-        if (!error && rank <100) {
+        if (!error) {
           var $ = cheerio.load(html);
           
           $('.image_typeAll>img').each(function(){
@@ -91,7 +90,7 @@ const Rank_Day = () => {
                 </SimpleGrid>
               </Collapse>
               <Button size="sm" onClick={handleToggle} mt="1rem">
-                    Show {show ? "Less" : "More"}
+                    {show ? "닫기" : "더보기"}
                   </Button>
             </Box>
           </Box>
