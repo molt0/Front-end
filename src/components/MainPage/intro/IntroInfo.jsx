@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, Flex, Center  } from "@chakra-ui/react"
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, Flex, Center, Link  } from "@chakra-ui/react"
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -33,12 +33,12 @@ const IntroInfo = () => {
           </TabList>
           <TabPanels>
             <TabPanel className="tabPanel">
-              <li> 메인 페이지 디자인 변경으로 인해 아직 링크요소를 추가하지 못했습니다.</li>
+              <li> 다른 페이지로 넘어가는 예비 링크버튼입니다.</li>
               <br/>
-              <li> 글 작성 페이지 [ test.itsw.info/4/view/제목:아티스트명 ] </li>
-              <li> 검색 페이지 [ test.itsw.info/4/search ] </li>
-              <li> 로그인 페이지 [ test.itsw.info/4/login ]  ID/PW : itsw</li>
-              <li> 회원가입 페이지 [ test.itsw.info/4/signup]</li>
+              문서 페이지 <Link href="specific/view/제목:아티스트명 "><Button ml="142px">바로가기</Button></Link><br/> 
+              검색 페이지 <Link href="/search  "><Button ml="142px">바로가기</Button></Link> <br/>
+              로그인 페이지 / ID/PW : itsw <Link href="/login  "><Button ml="25px">바로가기</Button></Link><br/>
+              회원가입 페이지 / ID/PW : itsw <Link href="/signup  "><Button ml="8px">바로가기</Button></Link><br/>
               <br/>
               <p>MOLTO의 의미/목적에 대해 쓰기</p>
             </TabPanel>
