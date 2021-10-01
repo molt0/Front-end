@@ -5,7 +5,7 @@ import { Box, Flex, Image, Text, Heading } from "@chakra-ui/react";
 const HeadInfo = () => {
   return (
     <div>
-      <Box ml="200px" pt="150px">
+      <Box ml="200px" pt="120px">
         <Flex>
           <Image w="150px" h="150px"
             src="gibbresh.png"
@@ -16,8 +16,8 @@ const HeadInfo = () => {
               MOLTO
             </Heading>
             <Text fontSize="md" ml="30px" mt="10px">아티스트: hardtack, dks2312, jd053303, hansaekim </Text>
-            <Text fontSize="md" ml="46px" mt="5px">발매일: ??? </Text>
-            <Text fontSize="md" ml="62px" mt="5px">장르: IT소프트웨어</Text>
+            <Text fontSize="md" ml="46px" mt="5px">발매일: 2021년 11월 15일 </Text>
+            <Text fontSize="md" ml="62px" mt="5px">장르: IT소프트웨어 </Text>
           </Box>
         </Flex>
       </Box>
