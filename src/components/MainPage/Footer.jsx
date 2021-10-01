@@ -15,7 +15,6 @@ const Footer = () => {
         bg="teal.600"
         color="white"
      >
-       여기는 푸터!
     </Box>
   );
 }
