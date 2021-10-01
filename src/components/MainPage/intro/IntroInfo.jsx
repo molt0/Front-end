@@ -33,6 +33,13 @@ const IntroInfo = () => {
           </TabList>
           <TabPanels>
             <TabPanel className="tabPanel">
+              <li> 메인 페이지 디자인 변경으로 인해 아직 링크요소를 추가하지 못했습니다.</li>
+              <br/>
+              <li> 글 작성 페이지 [ test.itsw.info/4/view/제목:아티스트명 ] </li>
+              <li> 검색 페이지 [ test.itsw.info/4/search ] </li>
+              <li> 로그인 페이지 [ test.itsw.info/4/login ]  ID/PW : itsw</li>
+              <li> 회원가입 페이지 [ test.itsw.info/4/signup]</li>
+              <br/>
               <p>MOLTO의 의미/목적에 대해 쓰기</p>
             </TabPanel>
             <TabPanel className="tabPanel">
