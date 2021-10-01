@@ -5,13 +5,15 @@ import RecentSearch from "../../components/MainPage/RecentSearch";
 import Footer from '../../components/MainPage/Footer';
 import HeadInfo from '../../components/MainPage/intro/HeadInfo';
 import IntroInfo from '../../components/MainPage/intro/IntroInfo';
+import ModifiedList from '../../components/MainPage/ModifiedList';
+import Ranking_Concise from '../../components/MainPage/Ranking_Concise';
 import styled from "styled-components";
 
-import { Flex, Heading, Spacer } from "@chakra-ui/react";
+import { Flex, Heading, Spacer, Center, Box } from "@chakra-ui/react";
 
 const Container = styled.div`
   z-index: 0;
-  margin: 0 auto;
+  border-radius: 20px;
 
   width: 1200px;
 
@@ -25,10 +27,17 @@ const MainPage = () => {
     <>
       <Header />
       <SideMenu />
-      <Container>
-          <HeadInfo />
-          <IntroInfo />   
-      </Container>
+      <Box position="absolute" mt="50px" left="40px">
+        <ModifiedList/>
+        <Ranking_Concise/>
+      </Box>
+      
+      <Center>
+        <Container>
+            <HeadInfo />
+            <IntroInfo />   
+        </Container>
+      </Center>
       <Footer />
     </>
   );
