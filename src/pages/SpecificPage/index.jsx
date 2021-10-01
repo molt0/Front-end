@@ -45,6 +45,7 @@ const HideWhenScroll = styled.div`
 const SpecificPage = ({match}) => {
   const { title_artist } = match.params
 
+  const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   const [isURLFailed, setURLFailed] = useState(false);
   const [docsExist, setDocsExist] = useState(false);
 
@@ -63,40 +64,40 @@ const SpecificPage = ({match}) => {
   });
 
 
-  useEffect(()=>{
-    console.log("page mounted")
-    console.log(`URL Param Detected: ${title_artist}, intro`)
-  
-      const URLdivided = title_artist.split(':')
-      const title = URLdivided[0]
-      const artist = URLdivided[1]
-      const type = 'intro'
-     
-      if(title_artist === undefined || 
-                title === undefined ||
-               artist === undefined){
-          setURLFailed(true)
-        }
-      else{
-          setURLFailed(false)
-      }
-      
-      console.log(title)
-      console.log(artist)
-      console.log(type)
+    //when page loaded
+useEffect(()=>{
+  console.log("page mounted: 나누어진 URL 값을 저장하기 위해 컴포넌트가 2번 로딩됩니다")
+  console.log(`URL Param Detected: ${title_artist}, intro`)
+  console.log('------------------------------------------')
 
+  setURLdivided(title_artist.split(':'))
+  //여기다가 URLdivided 검사하면 작동 안함(useState async때문에 ㅠ)
+}, [])
 
-      Api.get(`specific/${title}/${artist}/${type}`).then((res)=>{
-        if(res.data.content === false){
-          setDocsExist(false)
-        }else{
-          setDocsExist(true)
-          setContent(res.data.content)
-        }
-      })
-     
+// get information from server if URLdivided value changed
+useEffect( ()=>{
+  async function fetchApi(){
+    if( URLdivided[0] === undefined || URLdivided[1] === undefined)
+      setURLFailed(true)
+    else 
+      setURLFailed(false) 
+  }
   
-  }, []);
+  //'then' keyword is possible because of 'async' keyword ^.^!
+  fetchApi().then(()=>{
+    
+    // setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
+    // console.log("<- RENDERED TWINCE BECAUSE OF UseState")
+
+    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
+      console.log(res.data)
+      setContent(res.data)
+    })
+    
+  })  
+
+}, [URLdivided]);
+
 
   return (
     <div>
