@@ -220,14 +220,18 @@ const ContentEditor = ({match}) => {
     setToggles(()=>
       toggles.map((y, mapIndex)=>
         mapIndex === index
-          ? { isToggle: true, text: y.text}
-          : { isToggle: false, text: y.text}
+          ? { isToggle: true, text: y.text, type: y.type}
+          : { isToggle: false, text: y.text, type: y.type}
           )
       );
+
+      console.log(toggles)
       //axios events
-      Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${ params.type == 'intro' ? toggles[0].type : toggles[index].type}`).then((res)=>{
+      Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
+        console.log(toggles[index].type)
         console.log(res.data)
       })
+      
   }
 
  
@@ -267,7 +271,7 @@ useEffect( ()=>{
     setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
     console.log("<- RENDERED TWINCE BECAUSE OF UseState")
 
-    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${ params.type == 'intro' ? toggles[0].type : toggles[index].type}`).then((res)=>{
+    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
       console.log(res.data)
     })
     
