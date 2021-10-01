@@ -38,7 +38,7 @@ const IntroInfo = () => {
               문서 페이지 <Link href="specific/view/제목:아티스트명 "><Button ml="142px">바로가기</Button></Link><br/> 
               검색 페이지 <Link href="/search  "><Button ml="142px">바로가기</Button></Link> <br/>
               로그인 페이지 / ID/PW : itsw <Link href="/login  "><Button ml="25px">바로가기</Button></Link><br/>
-              회원가입 페이지 / ID/PW : itsw <Link href="/signup  "><Button ml="8px">바로가기</Button></Link><br/>
+              회원가입 페이지<Link href="/signup  "><Button ml="8px">바로가기</Button></Link><br/>
               <br/>
               <p>MOLTO의 의미/목적에 대해 쓰기</p>
             </TabPanel>
