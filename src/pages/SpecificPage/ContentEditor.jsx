@@ -194,9 +194,10 @@ const FailedMsg = styled.p`
 `
 
 const ContentEditor = ({match}) => {
-  
+  const { title_artist } = match.params  
 
   const [content, setContent] = useState([]);
+  const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
   const [isURLFailed, setURLFailed] = useState(false);
   const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
@@ -219,43 +220,21 @@ const ContentEditor = ({match}) => {
     setToggles(()=>
       toggles.map((y, mapIndex)=>
         mapIndex === index
-          ? { isToggle: true, text: y.text}
-          : { isToggle: false, text: y.text}
+          ? { isToggle: true, text: y.text, type: y.type}
+          : { isToggle: false, text: y.text, type: y.type}
           )
       );
+
+      console.log(toggles)
       //axios events
-      fetchApi(index)
+      Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
+        console.log(toggles[index].type)
+        console.log(res.data)
+      })
+      
   }
 
-  const fetchApi = useCallback((index)=>{
-    {
-      const { title_artist } = match.params
-      console.log("page mounted")
-      console.log(`URL Param Detected: ${title_artist}, intro`)
-    
-      const URLdivided = title_artist.split(':')
-      console.log(URLdivided)
-
-      if(
-        URLdivided[0] === undefined ||
-        URLdivided[1] === undefined){
-         setURLFailed(true)
-       }
-     else{
-         setURLFailed(false)
-         setParams({...params, title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
-     }
-      
-      //파라미터 설정
-      
-      console.log(params.type)
-      //api get 으로 toogle의 type으로 가져오기
-      Api.get(`specific/${params.title}/${params.artist}/${ params.type == 'intro' ? toggles[0].type : toggles[index].type}`).then((response)=>{
-        console.log(response)
-      })
-    }
-  
-  })
+ 
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -265,19 +244,40 @@ const ContentEditor = ({match}) => {
   useEffect(()=>{
       window.addEventListener('scroll', updateScroll);
       setVisible(scrollPosition > 80)
-      console.log(footerVisible)
-
   },);
 
-// get information from server
-useEffect(async ()=>{
-  fetchApi()
+  //when page loaded
+useEffect(()=>{
+  console.log("page mounted: 나누어진 URL 값을 저장하기 위해 컴포넌트가 2번 로딩됩니다")
+  console.log(`URL Param Detected: ${title_artist}, intro`)
+  console.log('------------------------------------------')
 
-    
-    
-      
+  setURLdivided(title_artist.split(':'))
+  //여기다가 URLdivided 검사하면 작동 안함(useState async때문에 ㅠ)
+}, [])
 
-}, []);
+// get information from server if URLdivided value changed
+useEffect( ()=>{
+  async function fetchApi(){
+    if( URLdivided[0] === undefined || URLdivided[1] === undefined)
+      setURLFailed(true)
+    else 
+      setURLFailed(false) 
+  }
+  
+  //'then' keyword is possible because of 'async' keyword ^.^!
+  fetchApi().then(()=>{
+    
+    setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
+    console.log("<- RENDERED TWINCE BECAUSE OF UseState")
+
+    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
+      console.log(res.data)
+    })
+    
+  })  
+
+}, [URLdivided]);
 
   async function sendData() {
     if(readOnlyBoolean === true){
