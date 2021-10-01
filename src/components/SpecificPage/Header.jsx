@@ -13,15 +13,17 @@ import {
   margin-right: 20px;
  `
 
-const PageHeader = () => {
+const PageHeader = ({address}) => {
   return(
     <div>
         <Position>
           <Button size="md" mt="10px" ml="15px" onClick={()=> history.back()}>❮</Button>
           <Link to="/"><Button size="md" mt="10px" ml="5px" >메인화면으로</Button></Link>
-          <Button leftIcon={<PlusSquareIcon />} w="90px" colorScheme="teal" size="sm" float="right" mt="10px">
-            수정하기
-          </Button>
+          <Link to={{ pathname: {address}}}>
+            <Button leftIcon={<PlusSquareIcon />} w="90px" colorScheme="teal" size="sm" float="right" mt="10px">
+              수정하기
+            </Button>
+          </Link>
         </Position>
     </div>
   );

@@ -106,7 +106,7 @@ useEffect( ()=>{
       </HideWhenScroll>
       <Spacer />
       <ContentContainer>
-        <PageHeader />
+        <PageHeader address={title_artist}/>
  
         <HeadInfo />
         <ButtonMenus />
