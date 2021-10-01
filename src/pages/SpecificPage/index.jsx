@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import PageHeader from "../../components/SpecificPage/Header";
 import HeadInfo from "../../components/SpecificPage/HeadInfo";
 import ButtonMenus from "../../components/SpecificPage/ButtonMenus";
+import {Link} from "react-router-dom"
+
+import { PlusSquareIcon } from "@chakra-ui/icons"
 
 import Api from "../../Api"
+import { useHistory } from "react-router-dom";
 
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
@@ -15,7 +18,7 @@ import Header from "../../components/global/Header"
 
 // import Background from "../../components/global/Background";
 
-import { Divider, Switch, FormControl, FormLabel } from "@chakra-ui/react";
+import { Divider, Switch, FormControl, FormLabel, Button } from "@chakra-ui/react";
 
 const ContentContainer = styled.div`
   margin: 0 auto;
@@ -42,6 +45,63 @@ const HideWhenScroll = styled.div`
   transition: all 0.3s ease-in-out;
 `;
 
+const Position = styled.div` 
+height: 50px;
+
+margin-right: 20px;
+`;
+
+
+const IfDataLoadFailed = styled.div`
+  display: ${props => props.failed ? 'block' : 'none'};
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+
+  & Button{
+    margin-top: 15px;
+    width: 350px;
+
+    left: 15%;
+  }
+  
+  
+`;
+
+const FailedBox = styled.div`
+  font-family: 'Quicksand', sans-serif !important;
+  position: absolute;
+
+  width: 500px;
+  height: 350px;
+
+  left: 50%;
+  transform: translate(-50%, 50%);
+
+  border-radius: 10px;
+
+  background-color: #fff;
+`
+const FailedTitle = styled.p`
+    text-align: center;
+
+    margin-top: 30px;
+
+    color: #899e6e;
+    font-size: 30px;
+`
+
+const FailedMsg = styled.p`
+  text-align: center;
+
+  margin-top: 10px;
+
+  color: #899e6e;
+`
+
 const SpecificPage = ({match}) => {
   const { title_artist } = match.params
 
@@ -52,6 +112,9 @@ const SpecificPage = ({match}) => {
   const [content, setContent] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
+
+
+
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -101,12 +164,34 @@ useEffect( ()=>{
 
   return (
     <div>
+       <IfDataLoadFailed failed={isURLFailed}>
+        <FailedBox>
+          <FailedTitle>정보 불러오기를 실패했습니다 :(</FailedTitle>
+          <FailedMsg> URL 정보가 올바르지 않거나, 예상치 못한 오류가 발생했습니다!</FailedMsg>
+          <FailedMsg>
+            다음 항목을 확인해주세요: <br /> <br />
+            - URL의 형태는 '제목:아티스트' 형태여야 합니다. <br />
+            - 잘못된 요청을 하지 않았는지 확인해주세요
+          </FailedMsg>
+          <Button colorScheme="blue" onClick={()=>history.back()}>이전 페이지로 이동하기</Button>
+          <Link href="/"> <Button>홈페이지로 돌아가기</Button></Link>
+        </FailedBox>
+      </IfDataLoadFailed>
+
       <HideWhenScroll visibilty={footerVisible}>
         <Header />
       </HideWhenScroll>
       <Spacer />
       <ContentContainer>
-        <PageHeader address={title_artist}/>
+      <Position>
+          <Button size="md" mt="10px" ml="15px" onClick={()=> history.back()}>❮</Button>
+          <Link to="/"><Button size="md" mt="10px" ml="5px" >메인화면으로</Button></Link>
+          <Link to={`/specific/editor/${title_artist}`}>
+            <Button leftIcon={<PlusSquareIcon />} w="90px" colorScheme="teal" size="sm" float="right" mt="10px">
+              수정하기
+            </Button>
+          </Link>
+      </Position>
  
         <HeadInfo />
         <ButtonMenus />
