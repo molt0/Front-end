@@ -14,7 +14,7 @@ const Container = styled.div`
   color: teal;
   }
   .tabPanel{
-    height: 600px;
+    height: 1000px;
   }
 `
 
