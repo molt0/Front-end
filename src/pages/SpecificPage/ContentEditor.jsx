@@ -198,7 +198,7 @@ const ContentEditor = ({match}) => {
 
   const [content, setContent] = useState([]);
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
-  const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
+  // const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
   const [isURLFailed, setURLFailed] = useState(false);
   const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
@@ -230,6 +230,7 @@ const ContentEditor = ({match}) => {
       Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
         console.log(toggles[index].type)
         console.log(res.data)
+        setContent(res.data)
       })
       
   }
@@ -268,11 +269,12 @@ useEffect( ()=>{
   //'then' keyword is possible because of 'async' keyword ^.^!
   fetchApi().then(()=>{
     
-    setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
-    console.log("<- RENDERED TWINCE BECAUSE OF UseState")
+    // setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
+    // console.log("<- RENDERED TWINCE BECAUSE OF UseState")
 
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
       console.log(res.data)
+      setContent(res.data)
     })
     
   })  
@@ -299,6 +301,8 @@ useEffect( ()=>{
       {autoClose: 1500},
       {theme: "colored"}
     );
+
+
 
     // Api.post()
   }
@@ -335,11 +339,11 @@ useEffect( ()=>{
             <ModalFlex>
             <InputGroup>
               <InputLeftAddon children="곡 제목" />
-              <Input type="tel" placeholder="제목을 입력하세요" value={FakeData.document_info.title} />
+              <Input type="tel" placeholder="제목을 입력하세요" value={content.title} />
             </InputGroup>
             <InputGroup mt="10px">
               <InputLeftAddon children="아티스트" />
-              <Input type="tel" placeholder="제목을 입력하세요" value={FakeData.document_info.artist} />
+              <Input type="tel" placeholder="제목을 입력하세요" value={content.artist} />
             </InputGroup>
             <Flex>
               <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="230px">저장</Button>
