@@ -18,14 +18,6 @@ import {
   Text,
   Center
 } from "@chakra-ui/react";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from "@chakra-ui/react";
 import styled from "styled-components";
 
 import { HamburgerIcon, EditIcon, SettingsIcon, StarIcon, CalendarIcon, ChatIcon, DragHandleIcon, CopyIcon, MoonIcon, SunIcon, Search2Icon } from "@chakra-ui/icons";
