@@ -55,9 +55,11 @@ const InfoBtn = styled.div`
   text-align: center;
   border-radius: 30px;
 
+  background-color: #e6e6e6;
   transition: 0.1s ease-in-out;
   &:hover{
-    background-color: #e6e6e6;
+    background-color: #dfdfdf;
+    border-radius: 2px solid #e6e6e6;
     transform: scale(1.05)
   }
 `;
@@ -376,7 +378,7 @@ useEffect( ()=>{
 
         <InfoBtn onClick={onOpen}>
           <Heading as="h4" size="md" mt="13px">
-            {FakeData.document_info.title}
+            {`${content.title} (${content.artist})`}
           </Heading>
         </InfoBtn>
 
