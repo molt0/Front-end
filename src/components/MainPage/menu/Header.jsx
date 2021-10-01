@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: fixed;
+  margin-bottom: 30px;
   width: 100%;
   height: 60px;
   background-color: teal;
