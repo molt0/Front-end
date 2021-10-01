@@ -1,5 +1,4 @@
 import React from "react";
-import './style.css';
 import {
   Stack,
   Heading,
@@ -18,14 +17,6 @@ import {
   Icon,
   Text,
   Center
-} from "@chakra-ui/react";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
 } from "@chakra-ui/react";
 import styled from "styled-components";
 
