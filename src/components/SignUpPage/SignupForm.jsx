@@ -71,7 +71,7 @@ const SignupForm = () => {
         id: inputs.user_id		
     }
 
-    fetch('http://localhost:9090/checkid',{ 
+    fetch('http://localhost:1004/checkid',{  
         method:"post",
         headers: { "Content-Type":  "application/json" },
         body: JSON.stringify(data),	
