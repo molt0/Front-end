@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import {
   Input,
   Box,
-  Button,
-  Center,
-  InputRightElement,
-  InputGroup,
-  Icon,
   Text,
   Flex,
+  Center,
   Switch,
   Link,
-  Spacer
+  Spacer,
+  InputGroup,
+  InputRightElement,
+  Icon,
+  Button
 } from "@chakra-ui/react";
 import { WarningIcon, WarningTwoIcon, CheckCircleIcon } from '@chakra-ui/icons'
 
@@ -71,14 +71,14 @@ const SignupForm = () => {
         id: inputs.user_id		
     }
 
-    fetch('http://localhost:1004/checkid',{  
+    fetch('http://localhost:1004/checkid',{ 
         method:"post",
         headers: { "Content-Type":  "application/json" },
         body: JSON.stringify(data),	
     })
     .then(res => res.json())
     .then(json => {
-        // console.log("json"); 
+        console.log("json"); 
         if(json.tf === false){		
           setidCheckMSG('이미 존재하는 ID 입니다.');  
           setidCheckIcon(WarningTwoIcon);
@@ -94,8 +94,7 @@ const SignupForm = () => {
         }
     }); 
   });
-
-
+  
   return(
     <Center>
       <Box w="400px">
@@ -133,7 +132,6 @@ const SignupForm = () => {
             <Switch variant="outline"  onChange={handleClick} size="md"/>
             <Text loat="right" ml="5px" fontSize="sm" color="gray.500">TEXT</Text>
           </Flex>
-
           {/* nickname */}
           <Input name="user_name" onChange={onChange} value={user_name} width="100%" height="50px" mt="30px" placeholder="별명" />
           
@@ -150,7 +148,6 @@ const SignupForm = () => {
         </form>
       </Box>
     </Center>
-  );
-}
-
+    );
+  }
 export default SignupForm;
