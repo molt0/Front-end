@@ -198,7 +198,7 @@ const FailedMsg = styled.p`
 const ContentEditor = ({match}) => {
   const { title_artist } = match.params  
 
-  const [content, setContent] = useState({});
+  const [content, setContent] = useState([]);
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   // const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
   const [isURLFailed, setURLFailed] = useState(false);
@@ -211,22 +211,23 @@ const ContentEditor = ({match}) => {
 
   //카테고리 선택 toggle
   const [toggles, setToggles] = useState([
-    { isToggle: true, text: "곡 소개", type: 'intro' },
-    { isToggle: false, text: "가사", type: 'lyrics'},
-    { isToggle: false, text: "정보", type: 'info' },
-    { isToggle: false, text: "기타", type: 'etc' },
-    { isToggle: false, text: "관련 미디어", type: 'relate' },
+    {index:0, isToggle: true, text: "곡 소개", type: 'intro' },
+    {index:1, isToggle: false, text: "가사", type: 'lyrics'},
+    {index:2, isToggle: false, text: "정보", type: 'info' },
+    {index:3, isToggle: false, text: "기타", type: 'etc' },
+    {index:4, isToggle: false, text: "관련 미디어", type: 'relate' },
   ]);
+  const [selectedCategory, setSelectedCategory] = useState();
 
   const categoryClick = (index) =>{
     setToggles(()=>
       toggles.map((y, mapIndex)=>
         mapIndex === index
-          ? { isToggle: true, text: y.text, type: y.type}
-          : { isToggle: false, text: y.text, type: y.type}
+          ? {index: mapIndex, isToggle: true, text: y.text, type: y.type}
+          : {index: mapIndex, isToggle: false, text: y.text, type: y.type}
           )
       );
-
+      setSelectedCategory(index)
       console.log(toggles)
       //axios events
       Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
@@ -275,7 +276,8 @@ useEffect( ()=>{
     
     // setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
     // console.log("<- RENDERED TWINCE BECAUSE OF UseState")
-
+    
+    setSelectedCategory(0)
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
       console.log(res.data)
 
@@ -315,8 +317,9 @@ useEffect( ()=>{
     );
 
 
-
-    // Api.post()
+    //몇번째 토글인지 페이지 로딩 됬을 때, 저장 버튼 누를떄 알아야 함
+    Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`, savedContent)
+    console.log(toggles[selectedCategory].type)
   }
 
   const setReadOnly = () => {
@@ -351,11 +354,11 @@ useEffect( ()=>{
             <ModalFlex>
             <InputGroup>
               <InputLeftAddon children="곡 제목" />
-              <Input type="tel" placeholder="제목을 입력하세요" value={content.title} />
+              <Input type="tel" placeholder="제목을 입력하세요" onChange={(e)=>{}} value={content.title} />
             </InputGroup>
             <InputGroup mt="10px">
               <InputLeftAddon children="아티스트" />
-              <Input type="tel" placeholder="제목을 입력하세요" value={content.artist} />
+              <Input type="tel" placeholder="제목을 입력하세요" onChange={(e)=>{}} value={content.artist} />
             </InputGroup>
             <Flex>
               <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="230px">저장</Button>
@@ -388,7 +391,7 @@ useEffect( ()=>{
 
         <InfoBtn onClick={onOpen}>
           <Heading as="h4" size="md" mt="13px">
-            {`${content.title} (${content.artist})`}
+            {`${URLdivided[0]} (${URLdivided[1]})`}
           </Heading>
         </InfoBtn>
 
