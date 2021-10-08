@@ -265,9 +265,11 @@ useEffect( ()=>{
     if( URLdivided[0] === undefined || URLdivided[1] === undefined)
       setURLFailed(true)
     else 
-      setURLFailed(false) 
+      setURLFailed(false)   
   }
   
+  
+    
   //'then' keyword is possible because of 'async' keyword ^.^!
   fetchApi().then(()=>{
     
@@ -277,6 +279,11 @@ useEffect( ()=>{
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
       console.log(res.data)
       setContent(res.data)
+    }).then(()=>{
+      if(content.title === undefined || content.artist === undefined ){
+        setURLFailed(true)
+        console.log("서버 연결 실패")
+      }
     })
     
   })  
