@@ -14,6 +14,7 @@ import {
   Button
 } from "@chakra-ui/react";
 import { WarningIcon, WarningTwoIcon, CheckCircleIcon } from '@chakra-ui/icons'
+import Api from '../../Api/index'
 
 const SignupForm = () => {
 
@@ -44,6 +45,15 @@ const SignupForm = () => {
       email: ''
     })
   };
+
+  const Submit = () => {
+    Api.post(
+      '/add', 
+      {user_id: inputs.user_id, password: inputs.password, user_name: inputs.user_name, email: inputs.email})
+      .then(function (response) {console.log(response);})
+      .catch(error => {console.log('error : ',error.response)});
+      window.location.replace("/login");
+  }
 
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
@@ -95,11 +105,11 @@ const SignupForm = () => {
     }); 
   });
   
+ 
   return(
     <Center>
       <Box w="400px">
-        <form action="/add" method="POST">
-            {/* ID */}
+          {/* ID */}
             <InputGroup width="100%" height="40px" >
             <Input name="user_id" onChange={onChange} value={user_id} width="100%" height="50px"  placeholder="아이디" />
             <InputRightElement width="4.5rem">
@@ -114,7 +124,7 @@ const SignupForm = () => {
               type={show ? "text" : "password"}
               placeholder="비밀번호"
               height="50px"
-            />
+            /> 
           <InputGroup width="100%" height="40px" >
             <Input form="disabled"
               name="pwcheck" onChange={onChange} value={pwcheck} width="100%" height="100px"
@@ -137,15 +147,12 @@ const SignupForm = () => {
           
           {/* email */}
           <Input name="email" onChange={onChange} value={email} width="100%" height="50px" mt="20px" placeholder="E-mail" />
-          <Link href="../login">
-            <Button disabled={disabled} variant="outline" type="submit" width="250px" height="70px" ml="80px" mt="60px"  borderRadius="lg" bg="teal.300" color="#fff" fontSize="xl" fontWeight="extrabold">
-                  회원가입
-            </Button>
-          </Link>
+          <Button onClick={Submit} disabled={disabled} variant="outline" width="250px" height="70px" ml="80px" mt="60px"  borderRadius="lg" bg="teal.300" color="#fff" fontSize="xl" fontWeight="extrabold">
+                회원가입
+          </Button>
           <Button onClick={onReset}  variant="outline"  width="100px" height="35px" ml="155px" mt="30px"  borderRadius="lg" bg="gray.200" color="gray.500" fontSize="md" fontWeight="extrabold">
                 초기화
           </Button>
-        </form>
       </Box>
     </Center>
     );
