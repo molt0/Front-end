@@ -198,7 +198,7 @@ const FailedMsg = styled.p`
 const ContentEditor = ({match}) => {
   const { title_artist } = match.params  
 
-  const [content, setContent] = useState([]);
+  const [content, setContent] = useState({});
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   // const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
   const [isURLFailed, setURLFailed] = useState(false);
@@ -278,14 +278,17 @@ useEffect( ()=>{
 
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
       console.log(res.data)
-      setContent(res.data)
-    }).then(()=>{
-      if(content.title === undefined || content.artist === undefined ){
+
+      //받아온 데이터가 undefined인지 확인
+      if(res.data.title === undefined || res.data.artist === undefined ){
         setURLFailed(true)
-        console.log("서버 연결 실패")
       }
+      else{
+        setURLFailed(false)
+        setContent(res.data)
+      }
+        
     })
-    
   })  
 
 }, [URLdivided]);
