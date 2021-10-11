@@ -198,7 +198,7 @@ const FailedMsg = styled.p`
 const ContentEditor = ({match}) => {
   const { title_artist } = match.params  
 
-  const [content, setContent] = useState([]);
+  const [content, setContent] = useState({title: "", artist:"", contents:{}});
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   // const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
   const [isURLFailed, setURLFailed] = useState(false);
@@ -211,11 +211,11 @@ const ContentEditor = ({match}) => {
 
   //카테고리 선택 toggle
   const [toggles, setToggles] = useState([
-    {index:0, isToggle: true, text: "곡 소개", type: 'intro' },
-    {index:1, isToggle: false, text: "가사", type: 'lyrics'},
-    {index:2, isToggle: false, text: "정보", type: 'info' },
-    {index:3, isToggle: false, text: "기타", type: 'etc' },
-    {index:4, isToggle: false, text: "관련 미디어", type: 'relate' },
+    {index:0, isToggle: true, text: "곡 소개", type: 'content_intro' },
+    {index:1, isToggle: false, text: "가사", type: 'content_lyrics'},
+    {index:2, isToggle: false, text: "정보", type: 'content_info' },
+    {index:3, isToggle: false, text: "기타", type: 'content_etc' },
+    {index:4, isToggle: false, text: "관련 미디어", type: 'content_relate' },
   ]);
   const [selectedCategory, setSelectedCategory] = useState();
 
@@ -262,24 +262,23 @@ useEffect(()=>{
 
 // get information from server if URLdivided value changed
 useEffect( ()=>{
-  async function fetchApi(){
+  async function checkUrl(){
     if( URLdivided[0] === undefined || URLdivided[1] === undefined)
       setURLFailed(true)
     else 
       setURLFailed(false)   
   }
   
-  
     
   //'then' keyword is possible because of 'async' keyword ^.^!
-  fetchApi().then(()=>{
+  checkUrl().then(()=>{
     
     // setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
     // console.log("<- RENDERED TWINCE BECAUSE OF UseState")
     
     setSelectedCategory(0)
-    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
-      console.log(res.data)
+    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/content_intro`).then((res)=>{
+      
 
       //받아온 데이터가 undefined인지 확인
       if(res.data.title === undefined || res.data.artist === undefined ){
@@ -287,13 +286,17 @@ useEffect( ()=>{
       }
       else{
         setURLFailed(false)
-        setContent(res.data)
+        setContent(res.data)      
       }
         
     })
-  })  
+  }) 
 
-}, [URLdivided]);
+}, [URLdivided])
+
+useEffect( ()=>{
+  console.log(content.contents[Object.keys(content.contents)]) //콘솔로그는 content.contents의 내용을 출력
+}, [content])
 
   async function sendData() {
     if(readOnlyBoolean === true){
@@ -309,7 +312,7 @@ useEffect( ()=>{
 
     console.log("savedConent");
     console.log(savedContent);
-    
+
     toast.success("저장이 완료되었습니다!",
       {position: "bottom-left"},
       {autoClose: 1500},
@@ -318,7 +321,7 @@ useEffect( ()=>{
 
 
     //몇번째 토글인지 페이지 로딩 됬을 때, 저장 버튼 누를떄 알아야 함
-    Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`, savedContent)
+    Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`,{ savedContent })
     console.log(toggles[selectedCategory].type)
   }
 
@@ -414,12 +417,13 @@ useEffect( ()=>{
 
       <EditorContainer>
         <EditorJs
-          data={content}
+          data={content.contents[Object.keys(content.contents)]}
           onChange={(e) => {
             // setContent(content);
           }}
           instanceRef={(instance) => (instanceRef.current = instance)}
           tools={EDITOR_JS_TOOLS}
+          enableReInitialize="true"
         />
         
         
