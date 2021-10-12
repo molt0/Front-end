@@ -76,7 +76,9 @@ const SignupForm = () => {
     }
     if(user_id!='' && user_name!='' && email!='' && pwCheckIconColor=='green.300' && idCheckIconColor=='green.300') setdisabled('') 
     else setdisabled('disabled') 
-   
+  });
+  
+  useEffect( () => {
     const data = {
         id: inputs.user_id		
     }
@@ -103,8 +105,7 @@ const SignupForm = () => {
           setidCheckIconColor('green.300'); 
         }
     }); 
-  });
-  
+  },[user_id]);
  
   return(
     <Center>
