@@ -279,13 +279,16 @@ useEffect( ()=>{
     setSelectedCategory(0)
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/content_intro`).then((res)=>{
       
-
+      console.log(URLdivided[0])
+      console.log(URLdivided[1])
       //받아온 데이터가 undefined인지 확인
       if(res.data.title === undefined || res.data.artist === undefined ){
         setURLFailed(true)
+        
       }
       else{
         setURLFailed(false)
+        console.log(res.data)
         setContent(res.data)      
       }
         
@@ -319,10 +322,10 @@ useEffect( ()=>{
       {theme: "colored"}
     );
 
-
+    console.log(toggles[selectedCategory].type)
     //몇번째 토글인지 페이지 로딩 됬을 때, 저장 버튼 누를떄 알아야 함
     Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`,{ savedContent })
-    console.log(toggles[selectedCategory].type)
+   
   }
 
   const setReadOnly = () => {

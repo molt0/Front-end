@@ -152,7 +152,7 @@ useEffect( ()=>{
     // setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
     // console.log("<- RENDERED TWINCE BECAUSE OF UseState")
 
-    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/intro`).then((res)=>{
+    Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/content_intro`).then((res)=>{
       console.log(res.data)
       setContent(res.data)
     })
