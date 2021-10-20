@@ -161,10 +161,27 @@ const IfDataLoadFailed = styled.div`
     left: 15%;
   }
   
+`;
+
+const IfContentNotExist = styled.div`
+  display: ${props => props.notExist ? 'block' : 'none'};
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+
+  & Button{
+    margin-top: 15px;
+    width: 350px;
+
+    left: 15%;
+  }
   
 `;
 
-const FailedBox = styled.div`
+const NoticeBox = styled.div`
   font-family: 'Quicksand', sans-serif !important;
   position: absolute;
 
@@ -178,7 +195,7 @@ const FailedBox = styled.div`
 
   background-color: #fff;
 `
-const FailedTitle = styled.p`
+const InfoTitle = styled.p`
     text-align: center;
 
     margin-top: 30px;
@@ -187,7 +204,7 @@ const FailedTitle = styled.p`
     font-size: 30px;
 `
 
-const FailedMsg = styled.p`
+const InfoMsg = styled.p`
   text-align: center;
 
   margin-top: 10px;
@@ -200,7 +217,7 @@ const ContentEditor = ({match}) => {
 
   const [content, setContent] = useState({title: "", artist:"", contents:{}});
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
-  // const [params, setParams] = useState({title: null, artist: null, type: 'intro'})
+  const [isContentsNotExist, setContentNotExist] = useState(false)
   const [isURLFailed, setURLFailed] = useState(false);
   const [readOnlyBoolean, ReadOnlyStatus] = useState(false);
   const instanceRef = useRef(null);
@@ -281,23 +298,25 @@ useEffect( ()=>{
       
       console.log(URLdivided[0])
       console.log(URLdivided[1])
+      console.log(res.data)
       //받아온 데이터가 undefined인지 확인
       if(res.data.title === undefined || res.data.artist === undefined ){
         setURLFailed(true)
         
-      }
-      else{
+      }else{
         setURLFailed(false)
-        console.log(res.data)
-        setContent(res.data)      
+        setContent(res.data)  
       }
         
     })
+
+   
   }) 
 
 }, [URLdivided])
 
 useEffect( ()=>{
+  
   console.log(content.contents[Object.keys(content.contents)]) //콘솔로그는 content.contents의 내용을 출력
 }, [content])
 
@@ -338,18 +357,28 @@ useEffect( ()=>{
   return (
     <>
       <IfDataLoadFailed failed={isURLFailed}>
-        <FailedBox>
-          <FailedTitle>정보 불러오기를 실패했습니다 :(</FailedTitle>
-          <FailedMsg> URL 정보가 올바르지 않거나, 예상치 못한 오류가 발생했습니다!</FailedMsg>
-          <FailedMsg>
+        <NoticeBox>
+          <InfoTitle>정보 불러오기를 실패했습니다 :(</InfoTitle>
+          <InfoMsg> URL 정보가 올바르지 않거나, 예상치 못한 오류가 발생했습니다!</InfoMsg>
+          <InfoMsg>
             다음 항목을 확인해주세요: <br /> <br />
             - URL의 형태는 '제목:아티스트' 형태여야 합니다. <br />
             - 잘못된 요청을 하지 않았는지 확인해주세요
-          </FailedMsg>
+          </InfoMsg>
           <Button colorScheme="blue" onClick={()=>history.back()}>이전 페이지로 이동하기</Button>
           <Link href="/"> <Button>홈페이지로 돌아가기</Button></Link>
-        </FailedBox>
+        </NoticeBox>
       </IfDataLoadFailed>
+            
+      <IfContentNotExist notExist={content.contents === false ? true : false} >
+        <NoticeBox>
+          <InfoTitle>해당 문서는 존재하지 않아요!</InfoTitle>
+          <InfoMsg> 아직까지 만들어지지 않은 문서인거 같아요.</InfoMsg>
+          <InfoMsg> 직접 문서를 만드시거나 홈페이지로 돌아갈 수 있어요</InfoMsg>
+          <Button colorScheme="blue" onClick={()=>{setContentNotExist(false); console.log("문서를 직접 만듭니다")}}>직접 만들기!</Button>
+          <Link href="/"> <Button>홈페이지로 돌아가기</Button></Link>
+        </NoticeBox>
+      </IfContentNotExist>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
