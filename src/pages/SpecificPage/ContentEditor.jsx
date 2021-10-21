@@ -335,7 +335,14 @@ useEffect( ()=>{
     console.log("savedConent");
     console.log(savedContent);
 
-    toast.success("저장이 완료되었습니다!",
+    if(savedContent.blocks.length === 0){
+      toast.warning("내용이 비어있습니다!",
+      {position: "bottom-left"},
+      {autoClose: 1500},
+      {theme: "colored"}
+    );
+    }else{
+      toast.success("저장이 완료되었습니다!",
       {position: "bottom-left"},
       {autoClose: 1500},
       {theme: "colored"}
@@ -344,7 +351,8 @@ useEffect( ()=>{
     console.log(toggles[selectedCategory].type)
     //몇번째 토글인지 페이지 로딩 됬을 때, 저장 버튼 누를떄 알아야 함
     Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`,{ savedContent })
-   
+    }
+
   }
 
   const setReadOnly = () => {
