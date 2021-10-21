@@ -109,7 +109,7 @@ const SpecificPage = ({match}) => {
   const [isURLFailed, setURLFailed] = useState(false);
   const [docsExist, setDocsExist] = useState(false);
 
-  const [content, setContent] = useState();
+  const [content, setContent] = useState({title: "", artist:"", contents:{}});
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
 
@@ -196,9 +196,10 @@ useEffect( ()=>{
         <HeadInfo />
         <ButtonMenus />
         <EditorJs 
-        data={content}
+        data={content.contents[Object.keys(content.contents)]}
         tools={EDITOR_JS_TOOLS}
         readOnly
+        enableReInitialize="true"
       />
         <Divider mt="30px" colorScheme="whiteAlpha" />
         
