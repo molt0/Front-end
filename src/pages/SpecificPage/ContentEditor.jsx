@@ -248,6 +248,7 @@ const ContentEditor = ({match}) => {
       console.log(toggles)
       //axios events
       Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
+        setContent({title: "", artist:"", contents:{}})
         console.log(toggles[index].type)
         console.log(res.data)
         setContent(res.data)
@@ -255,7 +256,6 @@ const ContentEditor = ({match}) => {
       
   }
 
- 
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -293,9 +293,10 @@ useEffect( ()=>{
     // setParams({title: URLdivided[0], artist: URLdivided[1], type: 'intro'})
     // console.log("<- RENDERED TWINCE BECAUSE OF UseState")
     
+
     setSelectedCategory(0)
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/content_intro`).then((res)=>{
-      
+      setContent({title: "", artist:"", contents:{}})
       console.log(URLdivided[0])
       console.log(URLdivided[1])
       console.log(res.data)
@@ -472,7 +473,7 @@ useEffect( ()=>{
           }}
           instanceRef={(instance) => (instanceRef.current = instance)}
           tools={EDITOR_JS_TOOLS}
-          enableReInitialize="true"
+          enableReInitialize="false"
         />
         
         
@@ -480,7 +481,7 @@ useEffect( ()=>{
 
       <Toolbar visibilty={footerVisible}>
           <ToolbarFlex>
-            <DocName><p>{FakeData.document_info.title}</p></DocName>
+            <DocName><p>{content.title}</p></DocName>
             
             <Button colorScheme="green" onClick={sendData}>저장</Button>
           </ToolbarFlex>
