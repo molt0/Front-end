@@ -303,10 +303,13 @@ useEffect( ()=>{
       if(res.data.title === undefined || res.data.artist === undefined ){
         setURLFailed(true)
         
+        
       }else{
         setURLFailed(false)
-        setContent(res.data)  
+        setContent(res.data)     
       }
+     
+      
         
     })
 
@@ -318,6 +321,12 @@ useEffect( ()=>{
 useEffect( ()=>{
   
   console.log(content.contents[Object.keys(content.contents)]) //콘솔로그는 content.contents의 내용을 출력
+  
+  if(content.contents === false )
+    setContentNotExist(true)
+  else
+    setContentNotExist(false)
+ 
 }, [content])
 
   async function sendData() {
@@ -378,7 +387,7 @@ useEffect( ()=>{
         </NoticeBox>
       </IfDataLoadFailed>
             
-      <IfContentNotExist notExist={content.contents === false ? true : false} >
+      <IfContentNotExist notExist={isContentsNotExist === true ? true : false} >
         <NoticeBox>
           <InfoTitle>해당 문서는 존재하지 않아요!</InfoTitle>
           <InfoMsg> 아직까지 만들어지지 않은 문서인거 같아요.</InfoMsg>
