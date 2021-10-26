@@ -17,7 +17,7 @@ const HeadInfo = (props) => {
             </Heading>
             <Text fontSize="md" ml="30px" mt="10px">아티스트: {props.artist}</Text>
             <Text fontSize="md" ml="30px" mt="5px">발매일: 무제</Text>
-            <Text fontSize="md" ml="30px" mt="5px">장르: POP</Text>
+            <Text fontSize="md" ml="30px" mt="5px">장르: {props.genre}</Text>
           </Box>
         </Flex>
       </Box>

@@ -108,7 +108,7 @@ const SpecificPage = ({match}) => {
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   const [isURLFailed, setURLFailed] = useState(false);
 
-  const [content, setContent] = useState({title: "", artist:"", contents:{}});
+  const [content, setContent] = useState({title: "", artist:"", genre: "", contents:{}});
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
@@ -135,7 +135,7 @@ const SpecificPage = ({match}) => {
       
       //axios events
       Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
-        setContent({title: "", artist:"", contents:{}})
+        setContent({title: "", artist:"", genre:"", contents:{}})
         console.log(toggles[index].type)
         console.log(res.data)
         setContent(res.data)
@@ -221,7 +221,7 @@ useEffect( ()=>{
           </Link>
       </Position>
           
-        <HeadInfo title = {content.title} artist = {content.artist} />
+        <HeadInfo title = {URLdivided[0]} artist = {URLdivided[1]} genre = {content.genre} />
 
           <Flex mt="30px" ml="50px">
           {toggles.map((toggle, i) =>

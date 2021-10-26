@@ -215,7 +215,7 @@ const InfoMsg = styled.p`
 const ContentEditor = ({match}) => {
   const { title_artist } = match.params  
 
-  const [content, setContent] = useState({title: "", artist:"", contents:{}});
+  const [content, setContent] = useState({title: "", artist:"", genre:"", contents:{}});
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   const [isContentsNotExist, setContentNotExist] = useState(false)
   const [isURLFailed, setURLFailed] = useState(false);
@@ -246,6 +246,7 @@ const ContentEditor = ({match}) => {
       );
       setSelectedCategory(index)
       console.log(toggles)
+      
       //axios events
       Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
         setContent({title: "", artist:"", contents:{}})
@@ -296,7 +297,7 @@ useEffect( ()=>{
 
     setSelectedCategory(0)
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/content_intro`).then((res)=>{
-      setContent({title: "", artist:"", contents:{}})
+      setContent({title: "", artist:"", genre: "장르 지정 안됨", contents:{}})
       console.log(URLdivided[0])
       console.log(URLdivided[1])
       console.log(res.data)
@@ -360,7 +361,7 @@ useEffect( ()=>{
 
     console.log(toggles[selectedCategory].type)
     //몇번째 토글인지 페이지 로딩 됬을 때, 저장 버튼 누를떄 알아야 함
-    Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`,{ savedContent })
+    Api.post(`/specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[selectedCategory].type}`,{ savedContent,  genre: content.genre})
     }
 
   }
@@ -407,14 +408,18 @@ useEffect( ()=>{
             <ModalFlex>
             <InputGroup>
               <InputLeftAddon children="곡 제목" />
-              <Input type="tel" placeholder="제목을 입력하세요" onChange={(e)=>{}} value={content.title} />
+              <Input type="tel" placeholder="제목을 입력하세요" onChange={(e)=>{}} value={content.title} disabled />
             </InputGroup>
             <InputGroup mt="10px">
               <InputLeftAddon children="아티스트" />
-              <Input type="tel" placeholder="제목을 입력하세요" onChange={(e)=>{}} value={content.artist} />
+              <Input type="tel" placeholder="제목을 입력하세요" onChange={(e)=>{}} value={content.artist} disabled />
+            </InputGroup>
+            <InputGroup mt="10px">
+              <InputLeftAddon children="장르" />
+              <Input type="text" placeholder="장르를 입력하세요" onChange={ (e)=>{} }  value={content.genre} />
             </InputGroup>
             <Flex>
-              <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="230px">저장</Button>
+              <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="230px" onClick={sendData}>저장</Button>
               <Button mt="10px" colorScheme="green" size="sm" width="80px" ml="5px" variant="outline">초기화</Button>
             </Flex>
 
