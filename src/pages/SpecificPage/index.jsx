@@ -18,7 +18,7 @@ import Header from "../../components/global/Header"
 
 // import Background from "../../components/global/Background";
 
-import { Divider, Switch, FormControl, FormLabel, Button } from "@chakra-ui/react";
+import { Divider, Switch, FormControl, FormLabel, Button, Flex } from "@chakra-ui/react";
 
 const ContentContainer = styled.div`
   margin: 0 auto;
@@ -107,13 +107,41 @@ const SpecificPage = ({match}) => {
 
   const [URLdivided, setURLdivided] = useState([]); //[0]:제목, [1]:아티스트
   const [isURLFailed, setURLFailed] = useState(false);
-  const [docsExist, setDocsExist] = useState(false);
 
   const [content, setContent] = useState({title: "", artist:"", contents:{}});
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState();
 
+  const [toggles, setToggles] = useState([
+    { isToggle: true, text: "곡 소개", type: 'content_intro' },
+    { isToggle: false, text: "가사", type: 'content_lyrics'},
+    { isToggle: false, text: "정보", type: 'content_info' },
+    { isToggle: false, text: "기타", type: 'content_etc' },
+    { isToggle: false, text: "관련 미디어", type: 'content_relate' },
+  ]);
+  //i is for index
+  const onClick = (index) => {
+    setToggles((prevState) =>
+      toggles.map((x, mapIndex) =>
+      mapIndex === index
+      ? { isToggle: true, text: x.text, type: x.type}
+      : { isToggle: false, text: x.text, type: x.type}
+      )
+    );
 
+    setSelectedCategory(index)
+      console.log(toggles)
+      
+      //axios events
+      Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/${toggles[index].type}`).then((res)=>{
+        setContent({title: "", artist:"", contents:{}})
+        console.log(toggles[index].type)
+        console.log(res.data)
+        setContent(res.data)
+    })
+
+  }
 
 
   const updateScroll = () => {
@@ -192,9 +220,35 @@ useEffect( ()=>{
             </Button>
           </Link>
       </Position>
- 
-        <HeadInfo />
-        <ButtonMenus />
+          
+        <HeadInfo title = {content.title} artist = {content.artist} />
+
+          <Flex mt="30px" ml="50px">
+          {toggles.map((toggle, i) =>
+            toggle.isToggle ? (
+              <Button
+                w="200px"
+                colorScheme="teal"
+                size="md"
+                ml="10px"
+                onClick={() => onClick(i)}
+              >
+                {toggle.text}
+              </Button>
+            ) : (
+              <Button
+                w="200px"
+                colorScheme="teal"
+                size="md"
+                variant="outline"
+                ml="10px"
+                onClick={() => onClick(i)}
+              >
+                {toggle.text}
+              </Button>
+            )
+          )}
+        </Flex>
         <EditorJs 
         data={content.contents[Object.keys(content.contents)]}
         tools={EDITOR_JS_TOOLS}
