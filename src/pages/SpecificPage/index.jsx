@@ -109,6 +109,7 @@ const SpecificPage = ({match}) => {
   const [isURLFailed, setURLFailed] = useState(false);
 
   const [content, setContent] = useState({title: "", artist:"", contents:{}});
+  const [docInfo, setDocInfo] = useState({updated_at: "", created_at: ""})
   const [scrollPosition, setScrollPosition] = useState(0);
   const [footerVisible, setVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
@@ -183,6 +184,10 @@ useEffect( ()=>{
     Api.get(`specific/${URLdivided[0]}/${URLdivided[1]}/content_intro`).then((res)=>{
       console.log(res.data)
       setContent(res.data)
+
+      Api.get(`specific_/log/${URLdivided[0]}/${URLdivided[1]}`).then((res)=>{
+        setDocInfo({created_at: res.data.created_at, updated_at: res.data.updated_at})
+      })
     })
     
   })  
@@ -221,7 +226,7 @@ useEffect( ()=>{
           </Link>
       </Position>
           
-        <HeadInfo title = {URLdivided[0]} artist = {URLdivided[1]} genre = {content.genre} />
+        <HeadInfo title = {URLdivided[0]} artist = {URLdivided[1]} created={docInfo.created_at} updated={docInfo.updated_at} />
 
           <Flex mt="30px" ml="50px">
           {toggles.map((toggle, i) =>
