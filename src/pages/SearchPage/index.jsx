@@ -1,13 +1,32 @@
 import { 
   Box, 
   Button, Switch,
-  Flex, 
+  Flex,
+  Text, 
   Radio, 
   RadioGroup,
   Select, 
   SimpleGrid, 
   Stack,
-  Input
+  Input,
+  Center,
+  Divider,
+  
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalCloseButton,
+
+  Alert,
+  AlertIcon,
+  
+  FormControl,
+  FormLabel,
+
+  useDisclosure 
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import AlbumList from '../../components/SearchPage/AlbumList'
@@ -27,13 +46,15 @@ const NoData = styled.div`
   }
 `;
 
-const NoResult = styled.h1`
+const NoResult = styled.div`
    display: ${props => props.visible ? 'block' : 'none'};
+
+   & h1{
     font-size: 30px;
-
     text-align: center;
-
     color: red;
+   }
+   
 `;
 
 const SearchPage = () =>{
@@ -41,6 +62,12 @@ const SearchPage = () =>{
   const [isNoData, setNoData] = useState(false)
   const [searchResultIsNull, setSearchResultIsNull] = useState(false)
   const [query, setQuery] = useState("")
+  const [radioType, setRadioType] = useState("1")
+  const [TypeMsg, setTypeMsg] = useState("")
+  const [titleOrArist, setTitleArtist] = useState("");
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  
   function VH_more(){
     if(isVertHoriz ==  "horizontal") 
       setIsVertHoriz("vertical") 
@@ -50,9 +77,12 @@ const SearchPage = () =>{
 
   // 긁어온 음원 목록 (원본)
   const [moltoList, setmoltoList] = useState([
-    // {img:"음원_사진", artist:"아티스트_이름", name:"노래_제목30", time:200, like:3211, date: new Date("2021-09-03"), type:"팝"}
-    // 객체가 
+    // OBJECT STORE ON HERE
   ])
+
+  useEffect(()=>{
+    setmoltoList([])
+  },[])
 
    // 검색 데이터 존재 여부 검사
    useEffect(()=>{
@@ -65,7 +95,13 @@ const SearchPage = () =>{
     if(query == "")
       setSearchResultIsNull(false)
     
-  }, [moltoList, query])
+
+    if(radioType === "1")
+      setTypeMsg("아티스트 이름은 무엇인가요?")
+    else
+      setTypeMsg("제목은 무엇인가요?")
+
+  }, [moltoList, query, radioType])
 
   // 순서 정렬
   const [isContentSort, setIsContentSort] = useState("")
@@ -85,6 +121,18 @@ const SearchPage = () =>{
       else
         setmoltoList(res.data.result)
     })
+  }
+
+  function createDocumnet(){
+
+    if(titleOrArist === "")
+      return;
+    
+    if(radioType === "1" && titleOrArist !== "")
+      window.location.href = `/specific/editor/${query}:${titleOrArist}`
+
+    if(radioType === "2" && titleOrArist !== "")
+      window.location.href = `/specific/editor/${titleOrArist}:${query}`
   }
 
 
@@ -122,7 +170,60 @@ const SearchPage = () =>{
 
       <NoData noData={isNoData}>
         <p>검색창에 노래제목을 검색해보세요!</p>
-        <NoResult visible={searchResultIsNull && isNoData == true}>{query}와 관련된 문서가 없어요..!</NoResult>
+        <NoResult visible={searchResultIsNull && isNoData == true}>
+        <h1>[{query}] 관련된 문서가 없어요..!</h1>
+        <Center>
+          <Button onClick={onOpen} mt="20px">✨ 직접 문서 만들기</Button>
+        </Center>
+          <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>문서 만들기</ModalHeader>
+            <Divider />
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+
+              <Alert status="info">
+                <AlertIcon />
+                 키워드&nbsp; <strong>{query}</strong>&nbsp;은(는) 무엇인가요?
+              </Alert>
+
+
+              <RadioGroup defaultValue="1" mt="10px" onChange={setRadioType} value={radioType}>
+              <Stack spacing={5} direction="row">
+                <Radio colorScheme="blue" value="1">
+                  제목
+                </Radio>
+                <Radio colorScheme="green" value="2">
+                  아티스트
+                </Radio>
+              </Stack>
+            </RadioGroup>
+
+            <Divider mt="20px"/>
+
+              
+              <Alert status="warning">
+                <AlertIcon />
+                 {TypeMsg}
+              </Alert>
+                <Input placeholder="내용을 입력" mt="5px" onChange={(e)=>{setTitleArtist(e.target.value) }} />
+              
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={createDocumnet}>
+                만들기!
+              </Button>
+              <Button onClick={onClose}>취소</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+        </NoResult>
+
       </NoData>
 
       <SimpleGrid w="1000px" m="0 auto " p="10px" spacing="20px" columns={isVertHoriz == "horizontal" ? "5" : "1"}> 
