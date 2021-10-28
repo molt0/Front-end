@@ -441,7 +441,7 @@ useEffect( ()=>{
 
       <ControlContainer>
         <Flex>
-          <Button size="md" onClick={()=>history.back()}>❮</Button>
+          <Button size="md" onClick={()=>history.goBack()}>❮</Button>
         </Flex>
 
         <InfoBtn onClick={onOpen}>
