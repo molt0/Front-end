@@ -207,7 +207,7 @@ useEffect( ()=>{
             - 잘못된 요청을 하지 않았는지 확인해주세요
           </FailedMsg>
           <Button colorScheme="blue" onClick={()=>history.back()}>이전 페이지로 이동하기</Button>
-          <Link href="/"> <Button>홈페이지로 돌아가기</Button></Link>
+          <Link to="/"> <Button>홈페이지로 돌아가기</Button></Link>
         </FailedBox>
       </IfDataLoadFailed>
 
@@ -232,6 +232,7 @@ useEffect( ()=>{
           {toggles.map((toggle, i) =>
             toggle.isToggle ? (
               <Button
+                key={i}
                 w="200px"
                 colorScheme="teal"
                 size="md"
@@ -242,6 +243,7 @@ useEffect( ()=>{
               </Button>
             ) : (
               <Button
+                key={i}
                 w="200px"
                 colorScheme="teal"
                 size="md"
