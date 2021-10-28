@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../utils/EditorPlugins";
-import { FakeData } from "../../fake-data/EditorData";
+import { useHistory } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
@@ -225,6 +225,7 @@ const ContentEditor = ({match}) => {
   const [footerVisible, setVisible] = useState(false);
   //Modal
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const history = useHistory();
 
   //카테고리 선택 toggle
   const [toggles, setToggles] = useState([
@@ -393,8 +394,9 @@ useEffect( ()=>{
           <InfoTitle>해당 문서는 존재하지 않아요!</InfoTitle>
           <InfoMsg> 아직까지 만들어지지 않은 문서인거 같아요.</InfoMsg>
           <InfoMsg> 직접 문서를 만드시거나 홈페이지로 돌아갈 수 있어요</InfoMsg>
-          <Button colorScheme="blue" onClick={()=>{setContentNotExist(false); console.log("문서를 직접 만듭니다")}}>직접 만들기!</Button>
-          <Link href="/"> <Button>홈페이지로 돌아가기</Button></Link>
+          <Button colorScheme="blue" onClick={()=>{setContentNotExist(false); console.log("문서를 직접 만듭니다")}}>✏️ 직접 만들기!</Button>
+          <Link href="/"> <Button>🏠 홈페이지로 돌아가기</Button></Link>
+          <Button onClick={()=>{ history.goBack()}}>➖ 이전 페이지로 이동</Button>
         </NoticeBox>
       </IfContentNotExist>
 
