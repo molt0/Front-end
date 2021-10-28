@@ -393,7 +393,7 @@ useEffect( ()=>{
       <IfContentNotExist notExist={isContentsNotExist === true ? true : false} >
         <NoticeBox>
           <InfoTitle>해당 문서는 존재하지 않아요!</InfoTitle>
-          <InfoMsg> 아직까지 만들어지지 않은 문서인거 같아요.</InfoMsg>
+          <InfoMsg> ({URLdivided[0]})는 아직까지 만들어지지 않은 문서인거 같아요.</InfoMsg>
           <InfoMsg> 직접 문서를 만드시거나 홈페이지로 돌아갈 수 있어요</InfoMsg>
           <Button colorScheme="blue" onClick={()=>{setContentNotExist(false); setMakeCon(true); console.log("문서를 직접 만듭니다")}}>✏️ 직접 만들기!</Button>
           <Link href="/"> <Button>🏠 홈페이지로 돌아가기</Button></Link>
