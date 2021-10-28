@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import {Link} from "react-router-dom"
 import Album from "./Album"
 
-const AlbumList = ({ albums, isVertHoriz, isContentSort, gangr }) => {
+const AlbumList = ({ albums, isVertHoriz, isContentSort, genre,}) => {
   const [re, setRenewal] = useState(albums)
   var aList = albums
+
 
   // 순서 정렬
   function contentSort() {
@@ -23,9 +25,9 @@ const AlbumList = ({ albums, isVertHoriz, isContentSort, gangr }) => {
 
   //장르 필터
   function strainer() {
-    if (gangr != "") {
+    if (genre != "") {
       aList = aList.filter((element) => {
-        if (element.type == gangr) return true
+        if (element.type == genre) return true
     })}
   }
 
@@ -34,11 +36,13 @@ const AlbumList = ({ albums, isVertHoriz, isContentSort, gangr }) => {
     contentSort()   // 정렬
     strainer()  // 필터
     setRenewal(aList)
-  }, [albums, isVertHoriz, isContentSort, gangr])
+  }, [albums, isVertHoriz, isContentSort, genre])
 
   return (
     re.map((album, index) => (
-      <Album album={album} isVertHoriz={isVertHoriz} key={index} />
+      <Link to={`/specific/view/${album.name}:${album.artist}`}>
+        <Album album={album} isVertHoriz={isVertHoriz} key={index} />
+      </Link>
     ))
   )
 }
