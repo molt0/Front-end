@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Box, Flex, Image, Text, Heading } from "@chakra-ui/react";
 
-const HeadInfo = () => {
+const HeadInfo = (props) => {
   return (
     <div>
       <Box ml="400px" mt="80px">
@@ -13,11 +13,11 @@ const HeadInfo = () => {
           />
           <Box>
             <Heading size="lg" ml="30px" mt="10px">
-              여기는 노래 제목
+              {props.title}
             </Heading>
-            <Text fontSize="md" ml="30px" mt="10px">아티스트: 무제</Text>
-            <Text fontSize="md" ml="30px" mt="5px">발매일: 무제</Text>
-            <Text fontSize="md" ml="30px" mt="5px">장르: POP</Text>
+            <Text fontSize="md" ml="30px" mt="10px">아티스트: {props.artist}</Text>
+            <Text fontSize="md" ml="30px" mt="5px">최근 수정: {props.updated}</Text>
+            <Text fontSize="md" ml="30px" mt="5px">생성일: {props.created}</Text>
           </Box>
         </Flex>
       </Box>
