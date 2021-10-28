@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Album from "./Album"
 
-const AlbumList = ({ albums, isVertHoriz, isContentSolt, gangr }) => {
+const AlbumList = ({ albums, isVertHoriz, isContentSort, gangr }) => {
   const [re, setRenewal] = useState(albums)
   var aList = albums
 
   // 순서 정렬
-  function contentSolt() {
-    switch (isContentSolt) {
+  function contentSort() {
+    switch (isContentSort) {
       case "인기":
         aList.sort((a, b) => {
           return b.like - a.like
@@ -31,10 +31,10 @@ const AlbumList = ({ albums, isVertHoriz, isContentSolt, gangr }) => {
 
   useEffect(() => {
     aList = albums
-    contentSolt()   // 정렬
+    contentSort()   // 정렬
     strainer()  // 필터
     setRenewal(aList)
-  }, [albums, isVertHoriz, isContentSolt, gangr])
+  }, [albums, isVertHoriz, isContentSort, gangr])
 
   return (
     re.map((album, index) => (
