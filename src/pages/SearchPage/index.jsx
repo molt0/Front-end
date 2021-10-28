@@ -56,17 +56,17 @@ const SearchPage = () =>{
   ])
 
   // 순서 정렬
-  const [isContentSolt, setIsContentSolt] = useState("")
+  const [isContentSort, setIsContentSort] = useState("")
 
   // 장르 필터
-  const [gangr, setGangr] = useState("")
+  const [genre, setGenre] = useState("")
 
 
   return (
     <Box >
       <Flex h={50} lineHeight="50px" bgColor="#70ebe0">
         <Box flex="2" ml={5}>
-          <Select w={200} placeholder="모든 장르" onChange={(e)=>{setGangr(e.target.value) }}>
+          <Select w={200} placeholder="모든 장르" onChange={(e)=>{setGenre(e.target.value) }}>
             <option value="발라드">발라드</option>
             <option value="팝">팝</option>
             <option value="락">락</option>
@@ -75,7 +75,7 @@ const SearchPage = () =>{
         </Box>
 
         <Flex flex="1" justifyContent="space-around">
-          <RadioGroup w="300px" onChange={(value)=>{setIsContentSolt(value)}}>
+          <RadioGroup w="300px" onChange={(value)=>{setIsContentSort(value)}}>
             <Stack direction="row">
               <Radio value="최신" >최신순</Radio>
               <Radio value="인기" >인기순</Radio>
@@ -89,7 +89,7 @@ const SearchPage = () =>{
       </Flex>
 
       <SimpleGrid w="1000px" m="0 auto " p="10px" spacing="20px" columns={isVertHoriz == "horizontal" ? "5" : "1"}> 
-        <AlbumList albums={moltoList} isVertHoriz={isVertHoriz} isContentSolt={isContentSolt} gangr={gangr}/>
+        <AlbumList albums={moltoList} isVertHoriz={isVertHoriz} isContentSort={isContentSort} genre={genre}/>
       </SimpleGrid>
     </Box>
   );
